@@ -21,13 +21,39 @@ const submitForm = async () => {
   const valid = await formRef.value.validate()
   if (valid) message.success('校验通过，已提交')
 }
+
+const tableColumns = [
+  { label: '姓名', prop: 'name' },
+  { label: '年龄', prop: 'age', align: 'center' },
+  { label: '城市', prop: 'city' },
+]
+const tableData = [
+  { name: '张三', age: 18, city: '深圳' },
+  { name: '李四', age: 20, city: '广州' },
+  { name: '王五', age: 22, city: '上海' },
+]
+const page = ref(1)
+const menuItems = [
+  { label: '首页', key: 'home' },
+  {
+    label: '组件',
+    key: 'components',
+    children: [
+      { label: '按钮', key: 'button' },
+      { label: '表格', key: 'table' },
+    ],
+  },
+  { label: '禁用项', key: 'disabled', disabled: true },
+]
+const handleMenuSelect = (key: string) => message.info(`选中：${key}`)
 </script>
 
 <template>
   <div class="page">
     <h1>shs_ui Playground</h1>
     <p>
-      M2 组件演示：Button / Icon / Tag / Card / Input / Select / Form / Modal / Message / Row / Col
+      M2 组件演示：Button / Icon / Tag / Card / Input / Select / Form / Modal / Message / Table /
+      Pagination / Menu / Row / Col
     </p>
 
     <h2>Button</h2>
@@ -113,6 +139,24 @@ const submitForm = async () => {
     <shs-modal v-model="modalVisible" title="确认操作" @confirm="message.success('已确认')">
       <p>确定要执行该操作吗？</p>
     </shs-modal>
+
+    <h2>Table / Pagination</h2>
+    <shs-table :columns="tableColumns" :data="tableData" border style="max-width: 560px">
+      <template #cell-name="{ row }">
+        <strong>{{ row.name }}</strong>
+      </template>
+    </shs-table>
+    <div class="row">
+      <shs-pagination v-model:current-page="page" :total="35" :page-size="10" />
+    </div>
+
+    <h2>Menu</h2>
+    <shs-menu
+      :items="menuItems"
+      mode="vertical"
+      style="max-width: 200px"
+      @select="handleMenuSelect"
+    />
 
     <h2>Layout（Row / Col）</h2>
     <div class="row">

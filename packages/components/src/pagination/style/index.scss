@@ -1,0 +1,36 @@
+.shs-pagination {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+
+  &__btn {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 8px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-sm, 4px);
+    background-color: var(--shs-color-bg);
+    color: var(--shs-color-text);
+    font-size: var(--shs-font-size-md);
+    cursor: pointer;
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+
+    &:hover:not(:disabled):not(.is-active) {
+      border-color: var(--shs-color-primary);
+      color: var(--shs-color-primary);
+    }
+
+    &.is-active {
+      border-color: var(--shs-color-primary);
+      background-color: var(--shs-color-primary);
+      color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

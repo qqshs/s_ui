@@ -10,8 +10,11 @@ import { ShsSelect } from './select'
 import { ShsForm, ShsFormItem } from './form'
 import { ShsModal } from './modal'
 import { ShsMessage, message } from './message'
+import { ShsTable } from './table'
+import { ShsPagination } from './pagination'
+import { ShsMenu } from './menu'
 
-// M2 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
+// M2 全部 13 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
 const components: Plugin[] = [
   ShsButton,
   ShsIcon,
@@ -25,6 +28,9 @@ const components: Plugin[] = [
   ShsFormItem,
   ShsModal,
   ShsMessage,
+  ShsTable,
+  ShsPagination,
+  ShsMenu,
 ]
 
 export const install = (app: App) => {
@@ -50,6 +56,9 @@ export {
   ShsModal,
   ShsMessage,
   message,
+  ShsTable,
+  ShsPagination,
+  ShsMenu,
 }
 export * from './button/props'
 export * from './icon/props'
@@ -64,3 +73,6 @@ export * from './form/form-item/props'
 export * from './form/types'
 export * from './modal/props'
 export * from './message/props'
+export * from './table/props'
+export * from './pagination/props'
+export * from './menu/props'
