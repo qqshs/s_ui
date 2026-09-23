@@ -59,6 +59,7 @@
     align-items: stretch;
     height: 72px;
     padding: 4px 6px;
+    border: 1px solid var(--shs-color-border);
     border-radius: var(--shs-radius-sm, 6px);
     cursor: pointer;
     font-size: 14px;
@@ -80,6 +81,7 @@
     }
 
     &.is-selected {
+      border-color: var(--shs-color-primary);
       background-color: var(--shs-color-primary);
       color: #fff;
       .shs-calendar__day {
@@ -128,9 +130,10 @@
 
   &__popover {
     position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
     width: 340px;
     padding: 16px;
     border: 1px solid var(--shs-color-border);
@@ -251,12 +254,9 @@
 
 .shs-popover-enter-active,
 .shs-popover-leave-active {
-  transition:
-    opacity 0.2s,
-    transform 0.2s;
+  transition: opacity 0.2s;
 }
 .shs-popover-enter-from,
 .shs-popover-leave-to {
   opacity: 0;
-  transform: translateY(-6px);
 }
