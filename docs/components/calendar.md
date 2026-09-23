@@ -27,7 +27,7 @@ const events = ref([
 设置 `editable=false` 隐藏添加与删除，仅用于展示。
 
 ```vue
-<shs-calendar :events="events" editable="false" />
+<shs-calendar :events="events" :editable="false" />
 ```
 
 ## 事件
@@ -65,4 +65,4 @@ const events = ref([
 | update | 编辑待办 | `CalendarEvent` |
 | remove | 删除待办 | `id: string` |
 
-面板左侧为月视图日历（天格含待办数量徽标），右侧为选中日期待办区：输入框添加、点击标题编辑、删除按钮移除。
+面板为大尺寸月视图，天格内直接展示该日待办（最多两条，超出显示「更多N」）；点击任一天弹出浮动面板，在浮层中查看、添加、编辑、删除该日待办。

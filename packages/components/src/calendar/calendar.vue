@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { calendarProps, type CalendarEvent } from './props'
 
 defineOptions({ name: 'ShsCalendar' })
@@ -22,6 +22,8 @@ const now = new Date()
 const viewYear = ref(now.getFullYear())
 const viewMonth = ref(now.getMonth())
 const selectedDate = ref(props.modelValue || today)
+const open = ref(false)
+const rootRef = ref<HTMLElement | null>(null)
 
 const weekHeader = ['日', '一', '二', '三', '四', '五', '六']
 const newTitle = ref('')
@@ -48,9 +50,10 @@ const cells = computed<(number | null)[]>(() => {
   return list
 })
 
-const dayCount = (y: number, m: number, d: number) => {
-  const key = formatDate(y, m, d)
-  return eventsByDate.value[key]?.length || 0
+/** 某日在天格内展示的待办（最多两条）与「更多」剩余数 */
+const dayItems = (y: number, m: number, d: number) => {
+  const list = eventsByDate.value[formatDate(y, m, d)] || []
+  return { items: list.slice(0, 2), more: Math.max(0, list.length - 2) }
 }
 
 const isSelected = (d: number) =>
@@ -60,6 +63,7 @@ const isToday = (d: number) => today === formatDate(viewYear.value, viewMonth.va
 const selectDate = (d: number) => {
   selectedDate.value = formatDate(viewYear.value, viewMonth.value, d)
   emit('update:modelValue', selectedDate.value)
+  open.value = true
 }
 const prevMonth = () => {
   viewMonth.value--
@@ -118,10 +122,16 @@ const removeTodo = (id: string) => {
   )
   emit('remove', id)
 }
+
+function onClickOutside(e: MouseEvent) {
+  if (rootRef.value && !rootRef.value.contains(e.target as Node)) open.value = false
+}
+onMounted(() => document.addEventListener('click', onClickOutside))
+onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 </script>
 
 <template>
-  <div class="shs-calendar">
+  <div ref="rootRef" class="shs-calendar">
     <div class="shs-calendar__main">
       <div class="shs-calendar__header">
         <button class="shs-calendar__nav" @click="prevMonth">‹</button>
@@ -143,58 +153,71 @@ const removeTodo = (id: string) => {
           }"
           @click="d !== null && selectDate(d)"
         >
-          {{ d ?? '' }}
+          <span v-if="d !== null" class="shs-calendar__day">{{ d }}</span>
           <span
-            v-if="d !== null && dayCount(viewYear, viewMonth, d) > 0"
-            class="shs-calendar__badge"
+            v-if="d !== null && dayItems(viewYear, viewMonth, d).items.length > 0"
+            class="shs-calendar__todos-mini"
           >
-            {{ dayCount(viewYear, viewMonth, d) }}
+            <span
+              v-for="item in dayItems(viewYear, viewMonth, d).items"
+              :key="item.id"
+              class="shs-calendar__todo-mini"
+            >
+              {{ item.title }}
+            </span>
+            <span v-if="dayItems(viewYear, viewMonth, d).more > 0" class="shs-calendar__more">
+              更多{{ dayItems(viewYear, viewMonth, d).more }}
+            </span>
           </span>
         </span>
       </div>
     </div>
 
-    <div class="shs-calendar__side">
-      <div class="shs-calendar__side-title">{{ selectedDate }} · 星期{{ selectedWeekday }}</div>
+    <transition name="shs-popover">
+      <div v-if="open" class="shs-calendar__popover">
+        <div class="shs-calendar__popover-title">
+          {{ selectedDate }} · 星期{{ selectedWeekday }}
+        </div>
 
-      <div v-if="editable" class="shs-calendar__add">
-        <input
-          v-model="newTitle"
-          class="shs-calendar__add-input"
-          placeholder="新增待办..."
-          @keyup.enter="addTodo"
-        />
-        <button class="shs-calendar__add-btn" @click="addTodo">添加</button>
-      </div>
+        <div v-if="editable" class="shs-calendar__add">
+          <input
+            v-model="newTitle"
+            class="shs-calendar__add-input"
+            placeholder="新增待办..."
+            @keyup.enter="addTodo"
+          />
+          <button class="shs-calendar__add-btn" @click="addTodo">添加</button>
+        </div>
 
-      <div class="shs-calendar__todos">
-        <div v-if="!selectedEvents.length" class="shs-calendar__todos-empty">今日无待办</div>
-        <div
-          v-for="evt in selectedEvents"
-          :key="evt.id"
-          class="shs-calendar__todo"
-          :class="{ 'is-editing': editingId === evt.id }"
-        >
-          <template v-if="editingId !== evt.id">
-            <span class="shs-calendar__todo-title" @click="startEdit(evt)">
-              {{ evt.title }}
-            </span>
-            <button v-if="editable" class="shs-calendar__todo-del" @click="removeTodo(evt.id!)">
-              删除
-            </button>
-          </template>
-          <template v-else>
-            <input
-              v-model="editingTitle"
-              class="shs-calendar__todo-input"
-              @keyup.enter="saveEdit"
-            />
-            <button class="shs-calendar__todo-save" @click="saveEdit">保存</button>
-            <button class="shs-calendar__todo-cancel" @click="cancelEdit">取消</button>
-          </template>
+        <div class="shs-calendar__todos">
+          <div v-if="!selectedEvents.length" class="shs-calendar__todos-empty">今日无待办</div>
+          <div
+            v-for="evt in selectedEvents"
+            :key="evt.id"
+            class="shs-calendar__todo"
+            :class="{ 'is-editing': editingId === evt.id }"
+          >
+            <template v-if="editingId !== evt.id">
+              <span class="shs-calendar__todo-title" @click="startEdit(evt)">
+                {{ evt.title }}
+              </span>
+              <button v-if="editable" class="shs-calendar__todo-del" @click="removeTodo(evt.id!)">
+                删除
+              </button>
+            </template>
+            <template v-else>
+              <input
+                v-model="editingTitle"
+                class="shs-calendar__todo-input"
+                @keyup.enter="saveEdit"
+              />
+              <button class="shs-calendar__todo-save" @click="saveEdit">保存</button>
+              <button class="shs-calendar__todo-cancel" @click="cancelEdit">取消</button>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 

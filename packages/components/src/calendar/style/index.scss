@@ -1,7 +1,7 @@
 .shs-calendar {
-  display: inline-flex;
-  gap: 16px;
-  padding: 16px;
+  position: relative;
+  display: inline-block;
+  padding: 20px;
   border: 1px solid var(--shs-color-border);
   border-radius: var(--shs-radius-md, 8px);
   background-color: var(--shs-color-bg);
@@ -9,23 +9,23 @@
   color: var(--shs-color-text);
 
   &__main {
-    width: 280px;
+    width: 480px;
   }
 
   &__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 8px;
+    padding-bottom: 12px;
   }
 
   &__nav {
     border: none;
     background: transparent;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     color: var(--shs-color-text);
-    padding: 0 6px;
+    padding: 0 8px;
 
     &:hover {
       color: var(--shs-color-primary);
@@ -33,7 +33,7 @@
   }
 
   &__title {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
   }
 
@@ -41,26 +41,31 @@
   &__days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 4px;
     text-align: center;
   }
 
   &__week span {
     color: var(--shs-color-text-secondary, #9ca3af);
-    font-size: 12px;
-    padding: 4px 0;
+    font-size: 13px;
+    padding: 6px 0;
   }
 
   &__cell {
     position: relative;
-    height: 34px;
-    line-height: 34px;
-    border-radius: var(--shs-radius-sm, 4px);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: stretch;
+    height: 72px;
+    padding: 4px 6px;
+    border-radius: var(--shs-radius-sm, 6px);
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
+    text-align: left;
 
     &:hover:not(.is-empty):not(.is-selected) {
-      background-color: color-mix(in srgb, var(--shs-color-primary) 10%, transparent);
+      background-color: color-mix(in srgb, var(--shs-color-primary) 8%, transparent);
     }
 
     &.is-empty {
@@ -68,38 +73,74 @@
     }
 
     &.is-today:not(.is-selected) {
-      font-weight: 700;
       color: var(--shs-color-primary);
+      .shs-calendar__day {
+        font-weight: 700;
+      }
     }
 
     &.is-selected {
       background-color: var(--shs-color-primary);
       color: #fff;
+      .shs-calendar__day {
+        font-weight: 700;
+      }
+      .shs-calendar__todo-mini {
+        background-color: rgba(255, 255, 255, 0.22);
+        color: #fff;
+      }
+      .shs-calendar__more {
+        color: #fff;
+      }
     }
   }
 
-  &__badge {
+  &__day {
+    height: 18px;
+    line-height: 18px;
+  }
+
+  &__todos-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+  }
+
+  &__todo-mini {
+    font-size: 11px;
+    line-height: 16px;
+    padding: 0 4px;
+    border-radius: 3px;
+    background-color: color-mix(in srgb, var(--shs-color-primary) 10%, transparent);
+    color: var(--shs-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__more {
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--shs-color-primary);
+    padding-left: 4px;
+  }
+
+  &__popover {
     position: absolute;
-    top: 2px;
-    right: 4px;
-    min-width: 14px;
-    height: 14px;
-    line-height: 14px;
-    padding: 0 3px;
-    border-radius: 8px;
-    background-color: var(--shs-color-danger);
-    color: #fff;
-    font-size: 10px;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 100;
+    width: 340px;
+    padding: 16px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-md, 8px);
+    background-color: var(--shs-color-bg);
+    box-shadow: var(--shs-shadow-md);
   }
 
-  &__side {
-    width: 260px;
-    border-left: 1px solid var(--shs-color-border);
-    padding-left: 16px;
-  }
-
-  &__side-title {
-    font-size: 13px;
+  &__popover-title {
+    font-size: 14px;
     font-weight: 600;
     padding-bottom: 12px;
   }
@@ -111,10 +152,10 @@
 
     &-input {
       flex: 1;
-      height: 28px;
-      padding: 0 8px;
+      height: 32px;
+      padding: 0 10px;
       border: 1px solid var(--shs-color-border);
-      border-radius: var(--shs-radius-sm, 4px);
+      border-radius: var(--shs-radius-sm, 6px);
       background-color: var(--shs-color-bg);
       font-size: 13px;
 
@@ -125,10 +166,10 @@
     }
 
     &-btn {
-      height: 28px;
-      padding: 0 12px;
+      height: 32px;
+      padding: 0 14px;
       border: none;
-      border-radius: var(--shs-radius-sm, 4px);
+      border-radius: var(--shs-radius-sm, 6px);
       background-color: var(--shs-color-primary);
       color: #fff;
       font-size: 13px;
@@ -155,14 +196,14 @@
   &__todo {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 8px;
-    border-radius: var(--shs-radius-sm, 4px);
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: var(--shs-radius-sm, 6px);
     background-color: color-mix(in srgb, var(--shs-color-primary) 6%, transparent);
 
     &-title {
       flex: 1;
-      font-size: 13px;
+      font-size: 14px;
       cursor: pointer;
 
       &:hover {
@@ -178,7 +219,7 @@
       background-color: var(--shs-color-bg);
       font-size: 12px;
       cursor: pointer;
-      padding: 2px 6px;
+      padding: 3px 8px;
 
       &:hover {
         border-color: var(--shs-color-danger);
@@ -195,8 +236,8 @@
 
     &-input {
       flex: 1;
-      height: 26px;
-      padding: 0 6px;
+      height: 30px;
+      padding: 0 8px;
       border: 1px solid var(--shs-color-primary);
       border-radius: var(--shs-radius-sm, 4px);
       font-size: 13px;
@@ -206,4 +247,16 @@
       }
     }
   }
+}
+
+.shs-popover-enter-active,
+.shs-popover-leave-active {
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.shs-popover-enter-from,
+.shs-popover-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
 }
