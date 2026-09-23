@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { solarToLunar } from '@shs-ui/utils'
 import { calendarProps, type CalendarEvent } from './props'
 
 defineOptions({ name: 'ShsCalendar' })
@@ -55,6 +56,9 @@ const dayItems = (y: number, m: number, d: number) => {
   const list = eventsByDate.value[formatDate(y, m, d)] || []
   return { items: list.slice(0, 2), more: Math.max(0, list.length - 2) }
 }
+
+const lunarNameOf = (y: number, m: number, d: number) => solarToLunar(y, m, d).dayName
+const solarLabel = (y: number, m: number, d: number) => (d === 1 ? `${m + 1}月${d}日` : `${d}日`)
 
 const isSelected = (d: number) =>
   selectedDate.value === formatDate(viewYear.value, viewMonth.value, d)
@@ -153,7 +157,12 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
           }"
           @click="d !== null && selectDate(d)"
         >
-          <span v-if="d !== null" class="shs-calendar__day">{{ d }}</span>
+          <span v-if="d !== null" class="shs-calendar__lunar">
+            {{ lunarNameOf(viewYear, viewMonth, d) }}
+          </span>
+          <span v-if="d !== null" class="shs-calendar__day">
+            {{ solarLabel(viewYear, viewMonth, d) }}
+          </span>
           <span
             v-if="d !== null && dayItems(viewYear, viewMonth, d).items.length > 0"
             class="shs-calendar__todos-mini"

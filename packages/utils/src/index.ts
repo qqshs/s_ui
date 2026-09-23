@@ -32,3 +32,6 @@ export function genId(prefix = 'shs'): string {
 export function hyphenate(str: string): string {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 }
+
+export { solarToLunar, lunarMonthName, lunarDayName } from './lunar'
+export type { LunarDate } from './lunar'
