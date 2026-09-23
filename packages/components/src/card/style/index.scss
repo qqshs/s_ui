@@ -1,0 +1,35 @@
+.shs-card {
+  border-radius: var(--shs-radius-md);
+  background-color: var(--shs-color-bg);
+  border: 1px solid var(--shs-color-border);
+  overflow: hidden;
+
+  &.is-shadow-always {
+    box-shadow: var(--shs-shadow-md);
+  }
+
+  &.is-shadow-hover {
+    transition: box-shadow 0.25s ease;
+
+    &:hover {
+      box-shadow: var(--shs-shadow-md);
+    }
+  }
+
+  &__header {
+    padding: var(--shs-space-md) var(--shs-space-lg);
+    border-bottom: 1px solid var(--shs-color-border);
+    font-size: var(--shs-font-size-lg);
+    font-weight: 600;
+    color: var(--shs-color-text);
+  }
+
+  &__body {
+    padding: var(--shs-space-lg);
+  }
+
+  &__footer {
+    padding: var(--shs-space-md) var(--shs-space-lg);
+    border-top: 1px solid var(--shs-color-border);
+  }
+}

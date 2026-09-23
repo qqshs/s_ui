@@ -19,6 +19,17 @@ describe('ShsButton', () => {
     expect(wrapper.attributes('disabled')).toBeDefined()
   })
 
+  it('loading 时禁用并渲染加载图标', () => {
+    const wrapper = mount(ShsButton, { props: { loading: true } })
+    expect(wrapper.attributes('disabled')).toBeDefined()
+    expect(wrapper.find('.shs-button__loading').exists()).toBe(true)
+  })
+
+  it('round 时追加圆角类名', () => {
+    const wrapper = mount(ShsButton, { props: { round: true } })
+    expect(wrapper.classes()).toContain('is-round')
+  })
+
   it('点击触发 click 事件', async () => {
     const wrapper = mount(ShsButton, { slots: { default: '点击' } })
     await wrapper.trigger('click')

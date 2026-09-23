@@ -1,0 +1,71 @@
+.shs-input {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+
+  &__inner {
+    width: 100%;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-md);
+    background-color: var(--shs-color-bg);
+    color: var(--shs-color-text);
+    font-size: var(--shs-font-size-md);
+    line-height: 1.5;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: var(--shs-color-text-placeholder);
+    }
+
+    &:hover {
+      border-color: var(--shs-color-text-placeholder);
+    }
+
+    &:focus {
+      border-color: var(--shs-color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--shs-color-primary) 20%, transparent);
+    }
+  }
+
+  &--small .shs-input__inner {
+    padding: 4px 10px;
+    font-size: var(--shs-font-size-xs);
+  }
+
+  &--medium .shs-input__inner {
+    padding: 8px 12px;
+  }
+
+  &--large .shs-input__inner {
+    padding: 11px 14px;
+    font-size: var(--shs-font-size-lg);
+  }
+
+  &.is-disabled .shs-input__inner {
+    background-color: var(--shs-color-bg-hover);
+    color: var(--shs-color-text-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &__clear {
+    position: absolute;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--shs-color-text-placeholder);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--shs-color-text-secondary);
+    }
+  }
+}

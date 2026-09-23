@@ -24,6 +24,16 @@ export const buttonProps = {
     type: String as PropType<'button' | 'submit' | 'reset'>,
     default: 'button',
   },
+  /** 是否加载中（加载时禁用并显示图标） */
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+  /** 是否为圆角按钮 */
+  round: {
+    type: Boolean,
+    default: false,
+  },
 } as const
 
 export type ButtonProps = typeof buttonProps
