@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { solarToLunar } from '@shs-ui/utils'
+import { solarToLunar, lunarYearGanzhi, lunarZodiac } from '@shs-ui/utils'
 import { calendarProps, type CalendarEvent } from './props'
 
 defineOptions({ name: 'ShsCalendar' })
@@ -88,6 +88,12 @@ const selectedEvents = computed(() => eventsByDate.value[selectedDate.value] || 
 const selectedWeekday = computed(
   () => weekHeader[new Date(selectedDate.value + 'T00:00:00').getDay()]
 )
+
+const lunarDetail = computed(() => {
+  const [y, m, d] = selectedDate.value.split('-').map(Number)
+  const l = solarToLunar(y, m, d)
+  return `农历${lunarYearGanzhi(l.lunarYear)}年（${lunarZodiac(l.lunarYear)}） · ${l.monthName}${l.dayName}`
+})
 
 const addTodo = () => {
   const title = newTitle.value.trim()
@@ -184,8 +190,14 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 
     <transition name="shs-popover">
       <div v-if="open" class="shs-calendar__popover">
-        <div class="shs-calendar__popover-title">
-          {{ selectedDate }} · 星期{{ selectedWeekday }}
+        <div class="shs-calendar__popover-header">
+          <div class="shs-calendar__popover-title">
+            {{ selectedDate }} · 星期{{ selectedWeekday }}
+          </div>
+          <button class="shs-calendar__popover-close" @click="open = false">×</button>
+        </div>
+        <div class="shs-calendar__popover-lunar">
+          {{ lunarDetail }}
         </div>
 
         <div v-if="editable" class="shs-calendar__add">

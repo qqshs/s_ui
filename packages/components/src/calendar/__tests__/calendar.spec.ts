@@ -87,4 +87,21 @@ describe('ShsCalendar', () => {
     expect(wrapper.find('.shs-calendar__add').exists()).toBe(false)
     expect(wrapper.find('.shs-calendar__todo-del').exists()).toBe(false)
   })
+
+  it('浮层可通过关闭按钮关闭', async () => {
+    const wrapper = mount(ShsCalendar, { props: { events } })
+    await openPopover(wrapper)
+    expect(wrapper.find('.shs-calendar__popover').exists()).toBe(true)
+    await wrapper.find('.shs-calendar__popover-close').trigger('click')
+    await nextTick()
+    expect(wrapper.find('.shs-calendar__popover').exists()).toBe(false)
+  })
+
+  it('浮层显示详细农历', async () => {
+    const wrapper = mount(ShsCalendar, { props: { events } })
+    await openPopover(wrapper)
+    const lunar = wrapper.find('.shs-calendar__popover-lunar')
+    expect(lunar.exists()).toBe(true)
+    expect(lunar.text()).toContain('农历')
+  })
 })

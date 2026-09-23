@@ -304,3 +304,19 @@ export function solarToLunar(year: number, month: number, day: number): LunarDat
     dayName: lunarDayName(lunarDay),
   }
 }
+
+const GAN = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸']
+const ZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥']
+const ZODIAC = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪']
+
+/** 农历年天干地支，如「丙午」 */
+export function lunarYearGanzhi(year: number): string {
+  const g = GAN[(year - 4) % 10]
+  const z = ZHI[(year - 4) % 12]
+  return g + z
+}
+
+/** 农历年生肖，如「马」 */
+export function lunarZodiac(year: number): string {
+  return ZODIAC[(year - 4) % 12]
+}

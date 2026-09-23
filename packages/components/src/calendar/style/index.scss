@@ -41,8 +41,12 @@
   &__days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: 0;
     text-align: center;
+  }
+
+  &__days {
+    border: 1px solid var(--shs-color-border);
   }
 
   &__week span {
@@ -59,8 +63,10 @@
     align-items: stretch;
     height: 72px;
     padding: 4px 6px;
-    border: 1px solid var(--shs-color-border);
-    border-radius: var(--shs-radius-sm, 6px);
+    border: 0;
+    border-right: 1px solid var(--shs-color-border);
+    border-bottom: 1px solid var(--shs-color-border);
+    border-radius: 0;
     cursor: pointer;
     font-size: 14px;
     text-align: left;
@@ -158,9 +164,35 @@
     box-shadow: var(--shs-shadow-md);
   }
 
+  &__popover-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+
   &__popover-title {
     font-size: 14px;
     font-weight: 600;
+  }
+
+  &__popover-close {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 4px;
+    color: var(--shs-color-text-secondary, #9ca3af);
+
+    &:hover {
+      color: var(--shs-color-text);
+    }
+  }
+
+  &__popover-lunar {
+    font-size: 12px;
+    color: var(--shs-color-text-secondary, #9ca3af);
     padding-bottom: 12px;
   }
 
