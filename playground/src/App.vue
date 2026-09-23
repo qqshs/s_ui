@@ -9,16 +9,16 @@ const handleClick = () => alert('shs_ui 按钮点击')
     <h1>shs_ui Playground</h1>
     <p>组件开发调试环境（M1 骨架）</p>
     <div class="row">
-      <shs-button @click="handleClick">默认按钮</shs-button>
-      <shs-button type="primary">主要按钮</shs-button>
-      <shs-button type="success">成功</shs-button>
-      <shs-button type="warning">警告</shs-button>
-      <shs-button type="danger" disabled>危险(禁用)</shs-button>
+      <shs-button @click="handleClick"> 默认按钮 </shs-button>
+      <shs-button type="primary"> 主要按钮 </shs-button>
+      <shs-button type="success"> 成功 </shs-button>
+      <shs-button type="warning"> 警告 </shs-button>
+      <shs-button type="danger" disabled> 危险(禁用) </shs-button>
     </div>
     <div class="row">
-      <shs-button size="small" type="primary">小</shs-button>
-      <shs-button type="primary">中</shs-button>
-      <shs-button size="large" type="primary">大</shs-button>
+      <shs-button size="small" type="primary"> 小 </shs-button>
+      <shs-button type="primary"> 中 </shs-button>
+      <shs-button size="large" type="primary"> 大 </shs-button>
     </div>
   </div>
 </template>

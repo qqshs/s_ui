@@ -12,6 +12,12 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "noEmit": true,
     "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@shs-ui/components": ["packages/components/src/index.ts"],
+      "@shs-ui/utils": ["packages/utils/src/index.ts"],
+      "@shs-ui/icons": ["packages/icons/src/index.ts"]
+    },
     "types": ["vitest/globals", "node"]
   },
   "include": ["packages/**/*", "docs/**/*", "playground/**/*"],

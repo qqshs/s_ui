@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "shs_ui —— 基于 Vue 3 的企业级前端 UI 框架（monorepo）",
+  "type": "module",
   "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">=18.0.0"
@@ -45,7 +46,6 @@
     "vite": "^5.3.3",
     "vitest": "^1.6.0",
     "vue": "^3.4.31",
-    "vue-tsc": "^2.0.26",
-    "@changesets/cli": "^2.27.5"
+    "vue-tsc": "^2.0.26"
   }
 }

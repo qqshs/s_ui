@@ -3,7 +3,7 @@ import { buttonProps } from './props'
 
 defineOptions({ name: 'ShsButton' })
 
-const props = defineProps(buttonProps)
+defineProps(buttonProps)
 const emit = defineEmits<{ (e: 'click', ev: MouseEvent): void }>()
 
 const handleClick = (ev: MouseEvent) => emit('click', ev)
