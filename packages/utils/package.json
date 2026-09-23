@@ -1,0 +1,22 @@
+{
+  "name": "@shs-ui/utils",
+  "version": "0.0.1",
+  "description": "shs_ui 工具函数库（纯函数、零副作用）",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.3.3"
+  }
+}

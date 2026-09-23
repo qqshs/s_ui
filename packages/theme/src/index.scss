@@ -1,0 +1,44 @@
+// shs_ui 主题与设计令牌（Design Tokens）
+// 所有组件样式均通过 var(--shs-*) 引用，支持运行时换肤与暗色模式（M4）。
+
+:root {
+  // ---- 颜色 ----
+  --shs-color-primary: #3b82f6;
+  --shs-color-primary-hover: #60a5fa;
+  --shs-color-primary-active: #2563eb;
+  --shs-color-success: #22c55e;
+  --shs-color-warning: #f59e0b;
+  --shs-color-danger: #ef4444;
+  --shs-color-info: #6b7280;
+
+  --shs-color-text: #1f2937;
+  --shs-color-text-secondary: #6b7280;
+  --shs-color-text-placeholder: #9ca3af;
+  --shs-color-border: #e5e7eb;
+  --shs-color-bg: #ffffff;
+  --shs-color-bg-hover: #f9fafb;
+
+  // ---- 间距 ----
+  --shs-space-xs: 4px;
+  --shs-space-sm: 8px;
+  --shs-space-md: 16px;
+  --shs-space-lg: 24px;
+  --shs-space-xl: 32px;
+
+  // ---- 字号 ----
+  --shs-font-size-xs: 12px;
+  --shs-font-size-sm: 13px;
+  --shs-font-size-md: 14px;
+  --shs-font-size-lg: 16px;
+  --shs-font-size-xl: 20px;
+
+  // ---- 圆角 ----
+  --shs-radius-sm: 4px;
+  --shs-radius-md: 8px;
+  --shs-radius-lg: 12px;
+
+  // ---- 阴影 ----
+  --shs-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shs-shadow-md: 0 4px 12px rgb(0 0 0 / 0.1);
+  --shs-shadow-lg: 0 12px 32px rgb(0 0 0 / 0.15);
+}

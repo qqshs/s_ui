@@ -1,0 +1,13 @@
+{
+  "name": "@shs-ui/theme",
+  "version": "0.0.1",
+  "description": "shs_ui 主题与设计令牌（CSS 变量）",
+  "style": "src/index.scss",
+  "files": ["src"],
+  "exports": {
+    ".": "./src/index.scss"
+  },
+  "scripts": {
+    "build": "echo \"[theme] 样式包无需 JS 构建，随组件库打包\""
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@shs-ui/components",
+  "version": "0.0.1",
+  "description": "shs_ui 组件库",
+  "type": "module",
+  "main": "dist/index.umd.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
+    },
+    "./style": "./dist/style.css"
+  },
+  "sideEffects": ["**/*.css", "**/*.scss"],
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@shs-ui/icons": "workspace:*",
+    "@shs-ui/theme": "workspace:*",
+    "@shs-ui/utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "vite": "^5.3.3",
+    "vite-plugin-dts": "^4.0.0",
+    "vue": "^3.4.31"
+  }
+}

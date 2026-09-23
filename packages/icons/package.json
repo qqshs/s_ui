@@ -1,0 +1,22 @@
+{
+  "name": "@shs-ui/icons",
+  "version": "0.0.1",
+  "description": "shs_ui 内置图标（SVG path 数据）",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "vite": "^5.3.3"
+  }
+}

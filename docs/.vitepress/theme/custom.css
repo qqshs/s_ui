@@ -1,0 +1,8 @@
+/* 文档站主题变量与 shs_ui 设计令牌对齐 */
+:root {
+  --vp-c-brand: var(--shs-color-primary);
+  --vp-c-brand-light: var(--shs-color-primary-hover);
+  --vp-c-brand-lighter: #93c5fd;
+  --vp-c-brand-dark: var(--shs-color-primary-active);
+  --vp-c-brand-darker: #1d4ed8;
+}
