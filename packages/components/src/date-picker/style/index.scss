@@ -1,0 +1,120 @@
+.shs-date-picker {
+  position: relative;
+  display: inline-block;
+
+  &__input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-md, 8px);
+    background-color: var(--shs-color-bg);
+    font-size: var(--shs-font-size-md);
+    color: var(--shs-color-text);
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:hover {
+      border-color: var(--shs-color-primary);
+    }
+
+    &.is-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      &:hover {
+        border-color: var(--shs-color-border);
+      }
+    }
+  }
+
+  &__placeholder {
+    color: var(--shs-color-text-secondary, #9ca3af);
+  }
+
+  &__panel {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 100;
+    width: 244px;
+    padding: 8px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-md, 8px);
+    background-color: var(--shs-color-bg);
+    box-shadow: var(--shs-shadow-md);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+
+  &__nav {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--shs-color-text);
+    padding: 0 6px;
+
+    &:hover {
+      color: var(--shs-color-primary);
+    }
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__week,
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+  }
+
+  &__week span {
+    color: var(--shs-color-text-secondary, #9ca3af);
+    font-size: 12px;
+    padding: 4px 0;
+  }
+
+  &__cell {
+    padding: 4px 0;
+    border-radius: var(--shs-radius-sm, 4px);
+    cursor: pointer;
+    font-size: 13px;
+
+    &:hover:not(.is-empty):not(.is-selected) {
+      background-color: color-mix(in srgb, var(--shs-color-primary) 10%, transparent);
+    }
+
+    &.is-empty {
+      cursor: default;
+    }
+
+    &.is-selected {
+      background-color: var(--shs-color-primary);
+      color: #fff;
+    }
+  }
+}
+
+.shs-dropdown-enter-active,
+.shs-dropdown-leave-active {
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.shs-dropdown-enter-from,
+.shs-dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}

@@ -13,8 +13,13 @@ import { ShsMessage, message } from './message'
 import { ShsTable } from './table'
 import { ShsPagination } from './pagination'
 import { ShsMenu } from './menu'
+import { ShsRadio, ShsRadioGroup } from './radio'
+import { ShsCheckbox, ShsCheckboxGroup } from './checkbox'
+import { ShsDatePicker } from './date-picker'
+import { ShsDateTimePicker } from './date-time-picker'
 
-// M2 全部 13 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
+// 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
+//        Radio Checkbox DatePicker DateTimePicker
 const components: Plugin[] = [
   ShsButton,
   ShsIcon,
@@ -31,6 +36,12 @@ const components: Plugin[] = [
   ShsTable,
   ShsPagination,
   ShsMenu,
+  ShsRadio,
+  ShsRadioGroup,
+  ShsCheckbox,
+  ShsCheckboxGroup,
+  ShsDatePicker,
+  ShsDateTimePicker,
 ]
 
 export const install = (app: App) => {
@@ -59,6 +70,12 @@ export {
   ShsTable,
   ShsPagination,
   ShsMenu,
+  ShsRadio,
+  ShsRadioGroup,
+  ShsCheckbox,
+  ShsCheckboxGroup,
+  ShsDatePicker,
+  ShsDateTimePicker,
 }
 export * from './button/props'
 export * from './icon/props'
@@ -76,3 +93,9 @@ export * from './message/props'
 export * from './table/props'
 export * from './pagination/props'
 export * from './menu/props'
+export * from './radio/props'
+export * from './radio/types'
+export * from './checkbox/props'
+export * from './checkbox/types'
+export * from './date-picker/props'
+export * from './date-time-picker/props'

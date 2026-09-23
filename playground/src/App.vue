@@ -46,6 +46,11 @@ const menuItems = [
   { label: '禁用项', key: 'disabled', disabled: true },
 ]
 const handleMenuSelect = (key: string) => message.info(`选中：${key}`)
+
+const gender = ref('male')
+const hobbies = ref(['read'])
+const date = ref('')
+const datetime = ref('2026-09-23 08:30')
 </script>
 
 <template>
@@ -53,7 +58,7 @@ const handleMenuSelect = (key: string) => message.info(`选中：${key}`)
     <h1>shs_ui Playground</h1>
     <p>
       M2 组件演示：Button / Icon / Tag / Card / Input / Select / Form / Modal / Message / Table /
-      Pagination / Menu / Row / Col
+      Pagination / Menu / Radio / Checkbox / DatePicker / DateTimePicker / Row / Col
     </p>
 
     <h2>Button</h2>
@@ -157,6 +162,25 @@ const handleMenuSelect = (key: string) => message.info(`选中：${key}`)
       style="max-width: 200px"
       @select="handleMenuSelect"
     />
+
+    <h2>Radio / Checkbox</h2>
+    <div class="row">
+      <shs-radio-group v-model="gender">
+        <shs-radio value="male" label="男" />
+        <shs-radio value="female" label="女" />
+      </shs-radio-group>
+      <shs-checkbox-group v-model="hobbies">
+        <shs-checkbox value="read" label="阅读" />
+        <shs-checkbox value="sport" label="运动" />
+        <shs-checkbox value="music" label="音乐" />
+      </shs-checkbox-group>
+    </div>
+
+    <h2>DatePicker / DateTimePicker</h2>
+    <div class="row">
+      <shs-date-picker v-model="date" clearable />
+      <shs-date-time-picker v-model="datetime" clearable />
+    </div>
 
     <h2>Layout（Row / Col）</h2>
     <div class="row">
