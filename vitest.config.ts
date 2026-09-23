@@ -4,6 +4,11 @@ import { resolve } from 'node:path'
 
 export default defineConfig({
   plugins: [vue()],
+  css: {
+    preprocessorOptions: {
+      scss: { api: 'modern' },
+    },
+  },
   resolve: {
     alias: {
       '@shs-ui/components': resolve(__dirname, 'packages/components/src/index.ts'),

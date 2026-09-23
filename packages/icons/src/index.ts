@@ -4,6 +4,8 @@
 export const iconNames = [
   'arrow-left',
   'arrow-right',
+  'arrow-down',
+  'arrow-up',
   'close',
   'check',
   'info',
@@ -17,6 +19,8 @@ export type IconName = (typeof iconNames)[number]
 export const iconPaths: Record<IconName, string> = {
   'arrow-left': 'M15 18l-6-6 6-6',
   'arrow-right': 'M9 18l6-6-6-6',
+  'arrow-down': 'M19 9l-7 7-7-7',
+  'arrow-up': 'M5 15l7-7 7 7',
   close: 'M6 6l12 12M18 6L6 18',
   check: 'M20 6L9 17l-5-5',
   info: 'M12 8h.01M12 12v4M12 4a8 8 0 100 16 8 8 0 000-16z',

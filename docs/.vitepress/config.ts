@@ -4,6 +4,13 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'shs_ui',
   description: '基于 Vue 3 的企业级前端 UI 框架',
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: { api: 'modern' },
+      },
+    },
+  },
   themeConfig: {
     logo: 'https://vitejs.dev/logo.svg',
     nav: [
@@ -26,6 +33,10 @@ export default defineConfig({
           { text: 'Tag 标签', link: '/components/tag' },
           { text: 'Card 卡片', link: '/components/card' },
           { text: 'Input 输入框', link: '/components/input' },
+          { text: 'Select 选择器', link: '/components/select' },
+          { text: 'Form 表单', link: '/components/form' },
+          { text: 'Modal 弹窗', link: '/components/modal' },
+          { text: 'Message 消息', link: '/components/message' },
           { text: 'Layout 布局', link: '/components/layout' },
         ],
       },

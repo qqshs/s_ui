@@ -1,0 +1,29 @@
+.shs-form {
+  &-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--shs-space-lg);
+  }
+
+  &-item__label {
+    width: var(--shs-form-label-width, 80px);
+    flex-shrink: 0;
+    padding-right: var(--shs-space-md);
+    line-height: 34px;
+    text-align: right;
+    font-size: var(--shs-font-size-md);
+    color: var(--shs-color-text);
+  }
+
+  &-item__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-item__error {
+    margin-top: var(--shs-space-xs);
+    font-size: var(--shs-font-size-xs);
+    color: var(--shs-color-danger);
+    line-height: 1.5;
+  }
+}

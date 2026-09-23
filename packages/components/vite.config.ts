@@ -5,6 +5,11 @@ import { resolve } from 'node:path'
 
 export default defineConfig({
   plugins: [vue(), dts({ include: ['src'], outDir: 'dist' })],
+  css: {
+    preprocessorOptions: {
+      scss: { api: 'modern' },
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),

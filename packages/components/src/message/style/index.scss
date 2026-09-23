@@ -1,0 +1,58 @@
+.shs-message-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.shs-message {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--shs-space-sm);
+  padding: 10px 16px;
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-md);
+  background-color: var(--shs-color-bg);
+  box-shadow: var(--shs-shadow-md);
+  font-size: var(--shs-font-size-md);
+  animation: shs-message-in 0.25s ease;
+
+  &--success {
+    border-color: color-mix(in srgb, var(--shs-color-success) 40%, transparent);
+    color: var(--shs-color-success);
+  }
+
+  &--error {
+    border-color: color-mix(in srgb, var(--shs-color-danger) 40%, transparent);
+    color: var(--shs-color-danger);
+  }
+
+  &--warning {
+    border-color: color-mix(in srgb, var(--shs-color-warning) 40%, transparent);
+    color: var(--shs-color-warning);
+  }
+
+  &--info {
+    border-color: color-mix(in srgb, var(--shs-color-info) 40%, transparent);
+    color: var(--shs-color-info);
+  }
+
+  &__content {
+    color: var(--shs-color-text);
+  }
+}
+
+@keyframes shs-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

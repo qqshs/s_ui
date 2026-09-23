@@ -1,27 +1,50 @@
 <script setup lang="ts">
-const handleClick = () => alert('shs_ui 按钮点击')
+import { reactive, ref } from 'vue'
+import { message } from '@shs-ui/components'
+
+const fruits = [
+  { label: '苹果', value: 'apple' },
+  { label: '香蕉', value: 'banana' },
+  { label: '西瓜', value: 'watermelon' },
+]
+const selected = ref('apple')
+
+const modalVisible = ref(false)
+
+const formRef = ref()
+const formModel = reactive({ name: '', phone: '' })
+const formRules = {
+  name: { required: true, message: '请输入姓名' },
+  phone: { min: 11, pattern: /^1\d{10}$/, message: '请输入 11 位手机号' },
+}
+const submitForm = async () => {
+  const valid = await formRef.value.validate()
+  if (valid) message.success('校验通过，已提交')
+}
 </script>
 
 <template>
   <div class="page">
     <h1>shs_ui Playground</h1>
-    <p>M2 第一批组件：Button / Icon / Tag / Card / Input / Row / Col</p>
+    <p>
+      M2 组件演示：Button / Icon / Tag / Card / Input / Select / Form / Modal / Message / Row / Col
+    </p>
 
     <h2>Button</h2>
     <div class="row">
-      <shs-button @click="handleClick"> 默认按钮 </shs-button>
+      <shs-button> 默认按钮 </shs-button>
       <shs-button type="primary"> 主要按钮 </shs-button>
-      <shs-button type="success"> 成功 </shs-button>
+      <shs-button type="success" @click="message.success('操作成功')"> 成功 </shs-button>
       <shs-button type="warning"> 警告 </shs-button>
-      <shs-button type="danger" disabled> 危险(禁用) </shs-button>
+      <shs-button type="danger"> 危险 </shs-button>
       <shs-button type="primary" loading> 加载中 </shs-button>
       <shs-button type="primary" round> 圆角 </shs-button>
     </div>
 
     <h2>Icon</h2>
     <div class="row">
-      <shs-icon name="arrow-left" :size="18" />
-      <shs-icon name="arrow-right" :size="18" />
+      <shs-icon name="arrow-down" :size="18" />
+      <shs-icon name="arrow-up" :size="18" />
       <shs-icon name="close" :size="18" />
       <shs-icon name="check" :size="18" color="#22c55e" />
       <shs-icon name="info" :size="18" color="#3b82f6" />
@@ -37,7 +60,6 @@ const handleClick = () => alert('shs_ui 按钮点击')
       <shs-tag type="warning"> 警告 </shs-tag>
       <shs-tag type="danger"> 危险 </shs-tag>
       <shs-tag type="primary" closable> 可关闭 </shs-tag>
-      <shs-tag type="primary" size="small"> 小号 </shs-tag>
     </div>
 
     <h2>Card</h2>
@@ -53,12 +75,44 @@ const handleClick = () => alert('shs_ui 按钮点击')
       </shs-card>
     </div>
 
-    <h2>Input</h2>
+    <h2>Input / Select</h2>
     <div class="row">
-      <shs-input placeholder="请输入内容" clearable style="width: 260px" />
-      <shs-input placeholder="禁用状态" disabled style="width: 200px" />
-      <shs-input type="password" placeholder="密码" style="width: 220px" />
+      <shs-input placeholder="请输入内容" clearable style="width: 240px" />
+      <shs-select v-model="selected" :options="fruits" clearable style="width: 180px" />
+      <shs-select :options="fruits" disabled style="width: 180px" />
     </div>
+
+    <h2>Form</h2>
+    <div class="form-box">
+      <shs-form ref="formRef" :model="formModel" :rules="formRules" label-width="80px">
+        <shs-form-item label="姓名" prop="name">
+          <shs-input v-model="formModel.name" placeholder="请输入姓名" style="width: 260px" />
+        </shs-form-item>
+        <shs-form-item label="手机号" prop="phone">
+          <shs-input
+            v-model="formModel.phone"
+            placeholder="请输入 11 位手机号"
+            style="width: 260px"
+          />
+        </shs-form-item>
+        <shs-form-item label="水果">
+          <shs-select v-model="selected" :options="fruits" style="width: 260px" />
+        </shs-form-item>
+        <shs-button type="primary" @click="submitForm"> 提交 </shs-button>
+      </shs-form>
+    </div>
+
+    <h2>Modal / Message</h2>
+    <div class="row">
+      <shs-button type="primary" @click="modalVisible = true"> 打开弹窗 </shs-button>
+      <shs-button @click="message.info('这是一条提示')"> info </shs-button>
+      <shs-button type="warning" @click="message.warning('请检查输入')"> warning </shs-button>
+      <shs-button type="danger" @click="message.error('操作失败')"> error </shs-button>
+    </div>
+
+    <shs-modal v-model="modalVisible" title="确认操作" @confirm="message.success('已确认')">
+      <p>确定要执行该操作吗？</p>
+    </shs-modal>
 
     <h2>Layout（Row / Col）</h2>
     <div class="row">
@@ -108,6 +162,12 @@ const handleClick = () => alert('shs_ui 按钮点击')
   display: grid;
   grid-template-columns: repeat(2, 280px);
   gap: 16px;
+}
+.form-box {
+  max-width: 420px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 .cell {
   background: #eef2ff;
