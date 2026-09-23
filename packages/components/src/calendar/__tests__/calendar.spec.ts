@@ -104,4 +104,15 @@ describe('ShsCalendar', () => {
     expect(lunar.exists()).toBe(true)
     expect(lunar.text()).toContain('农历')
   })
+
+  it('天格与浮层显示二十四节气', async () => {
+    const wrapper = mount(ShsCalendar, { props: { events } })
+    // 09-23 为秋分，天格农历行显示节气名
+    const termCell = wrapper
+      .findAll('.shs-calendar__cell')
+      .find((c) => c.find('.shs-calendar__todo-mini').exists())
+    expect(termCell!.find('.shs-calendar__lunar').text()).toBe('秋分')
+    await openPopover(wrapper)
+    expect(wrapper.find('.shs-calendar__popover-lunar').text()).toContain('秋分')
+  })
 })

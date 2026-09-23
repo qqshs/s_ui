@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { solarToLunar, lunarYearGanzhi, lunarZodiac } from '@shs-ui/utils'
+import { solarToLunar, lunarYearGanzhi, lunarZodiac, solarTermOf } from '@shs-ui/utils'
 import { calendarProps, type CalendarEvent } from './props'
 
 defineOptions({ name: 'ShsCalendar' })
@@ -57,7 +57,12 @@ const dayItems = (y: number, m: number, d: number) => {
   return { items: list.slice(0, 2), more: Math.max(0, list.length - 2) }
 }
 
-const lunarNameOf = (y: number, m: number, d: number) => solarToLunar(y, m, d).dayName
+// 注意：viewMonth 为 0-based（getMonth()），solarToLunar/solarTermOf 需要 1-based，此处 m + 1 修正
+const lunarCellLabel = (y: number, m: number, d: number) => {
+  const l = solarToLunar(y, m + 1, d)
+  return solarTermOf(y, m + 1, d) || `${l.monthName}${l.dayName}`
+}
+const isTermDay = (y: number, m: number, d: number) => solarTermOf(y, m + 1, d) !== null
 const solarLabel = (y: number, m: number, d: number) => (d === 1 ? `${m + 1}月${d}日` : `${d}日`)
 
 const isSelected = (d: number) =>
@@ -92,7 +97,9 @@ const selectedWeekday = computed(
 const lunarDetail = computed(() => {
   const [y, m, d] = selectedDate.value.split('-').map(Number)
   const l = solarToLunar(y, m, d)
-  return `农历${lunarYearGanzhi(l.lunarYear)}年（${lunarZodiac(l.lunarYear)}） · ${l.monthName}${l.dayName}`
+  const term = solarTermOf(y, m, d)
+  const base = `农历${lunarYearGanzhi(l.lunarYear)}年（${lunarZodiac(l.lunarYear)}） · ${l.monthName}${l.dayName}`
+  return term ? `${base} · ${term}` : base
 })
 
 const addTodo = () => {
@@ -163,8 +170,12 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
           }"
           @click="d !== null && selectDate(d)"
         >
-          <span v-if="d !== null" class="shs-calendar__lunar">
-            {{ lunarNameOf(viewYear, viewMonth, d) }}
+          <span
+            v-if="d !== null"
+            class="shs-calendar__lunar"
+            :class="{ 'has-term': isTermDay(viewYear, viewMonth, d) }"
+          >
+            {{ lunarCellLabel(viewYear, viewMonth, d) }}
           </span>
           <span v-if="d !== null" class="shs-calendar__day">
             {{ solarLabel(viewYear, viewMonth, d) }}

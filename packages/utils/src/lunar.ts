@@ -320,3 +320,47 @@ export function lunarYearGanzhi(year: number): string {
 export function lunarZodiac(year: number): string {
   return ZODIAC[(year - 4) % 12]
 }
+
+const TERM_NAMES = [
+  '小寒',
+  '大寒',
+  '立春',
+  '雨水',
+  '惊蛰',
+  '春分',
+  '清明',
+  '谷雨',
+  '立夏',
+  '小满',
+  '芒种',
+  '夏至',
+  '小暑',
+  '大暑',
+  '立秋',
+  '处暑',
+  '白露',
+  '秋分',
+  '寒露',
+  '霜降',
+  '立冬',
+  '小雪',
+  '大雪',
+  '冬至',
+]
+
+/** 二十四节气分钟偏移表（以 1900-01-06 小寒为基准） */
+const TERM_INFO = [
+  0, 21208, 42467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343,
+  285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758,
+]
+
+/** 返回某公历日期的二十四节气名，无节气则返回 null */
+export function solarTermOf(year: number, month: number, day: number): string | null {
+  for (let n = (month - 1) * 2; n <= (month - 1) * 2 + 1; n += 1) {
+    const t = new Date(
+      31556925974.7 * (year - 1900) + TERM_INFO[n] * 60000 + Date.UTC(1900, 0, 6, 2, 5)
+    )
+    if (t.getUTCDate() === day) return TERM_NAMES[n]
+  }
+  return null
+}
