@@ -51,6 +51,12 @@ const gender = ref('male')
 const hobbies = ref(['read'])
 const date = ref('')
 const datetime = ref('2026-09-23 08:30')
+
+const calendarDate = ref('')
+const calendarEvents = ref([
+  { id: '1', date: '2026-09-23', title: '开会' },
+  { id: '2', date: '2026-09-24', title: '出差' },
+])
 </script>
 
 <template>
@@ -181,6 +187,9 @@ const datetime = ref('2026-09-23 08:30')
       <shs-date-picker v-model="date" clearable />
       <shs-date-time-picker v-model="datetime" clearable />
     </div>
+
+    <h2>Calendar</h2>
+    <shs-calendar v-model="calendarDate" v-model:events="calendarEvents" />
 
     <h2>Layout（Row / Col）</h2>
     <div class="row">

@@ -44,6 +44,7 @@ export default defineConfig({
           { text: 'Checkbox 多选框', link: '/components/checkbox' },
           { text: 'DatePicker 日期', link: '/components/date-picker' },
           { text: 'DateTimePicker 日期时间', link: '/components/date-time-picker' },
+          { text: 'Calendar 日历', link: '/components/calendar' },
           { text: 'Layout 布局', link: '/components/layout' },
         ],
       },

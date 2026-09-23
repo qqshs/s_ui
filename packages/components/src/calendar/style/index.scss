@@ -1,0 +1,209 @@
+.shs-calendar {
+  display: inline-flex;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-md, 8px);
+  background-color: var(--shs-color-bg);
+  font-size: var(--shs-font-size-md);
+  color: var(--shs-color-text);
+
+  &__main {
+    width: 280px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+
+  &__nav {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--shs-color-text);
+    padding: 0 6px;
+
+    &:hover {
+      color: var(--shs-color-primary);
+    }
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__week,
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    text-align: center;
+  }
+
+  &__week span {
+    color: var(--shs-color-text-secondary, #9ca3af);
+    font-size: 12px;
+    padding: 4px 0;
+  }
+
+  &__cell {
+    position: relative;
+    height: 34px;
+    line-height: 34px;
+    border-radius: var(--shs-radius-sm, 4px);
+    cursor: pointer;
+    font-size: 13px;
+
+    &:hover:not(.is-empty):not(.is-selected) {
+      background-color: color-mix(in srgb, var(--shs-color-primary) 10%, transparent);
+    }
+
+    &.is-empty {
+      cursor: default;
+    }
+
+    &.is-today:not(.is-selected) {
+      font-weight: 700;
+      color: var(--shs-color-primary);
+    }
+
+    &.is-selected {
+      background-color: var(--shs-color-primary);
+      color: #fff;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    min-width: 14px;
+    height: 14px;
+    line-height: 14px;
+    padding: 0 3px;
+    border-radius: 8px;
+    background-color: var(--shs-color-danger);
+    color: #fff;
+    font-size: 10px;
+  }
+
+  &__side {
+    width: 260px;
+    border-left: 1px solid var(--shs-color-border);
+    padding-left: 16px;
+  }
+
+  &__side-title {
+    font-size: 13px;
+    font-weight: 600;
+    padding-bottom: 12px;
+  }
+
+  &__add {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+
+    &-input {
+      flex: 1;
+      height: 28px;
+      padding: 0 8px;
+      border: 1px solid var(--shs-color-border);
+      border-radius: var(--shs-radius-sm, 4px);
+      background-color: var(--shs-color-bg);
+      font-size: 13px;
+
+      &:focus {
+        outline: none;
+        border-color: var(--shs-color-primary);
+      }
+    }
+
+    &-btn {
+      height: 28px;
+      padding: 0 12px;
+      border: none;
+      border-radius: var(--shs-radius-sm, 4px);
+      background-color: var(--shs-color-primary);
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__todos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    &-empty {
+      color: var(--shs-color-text-secondary, #9ca3af);
+      font-size: 13px;
+      padding: 8px 0;
+    }
+  }
+
+  &__todo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: var(--shs-radius-sm, 4px);
+    background-color: color-mix(in srgb, var(--shs-color-primary) 6%, transparent);
+
+    &-title {
+      flex: 1;
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--shs-color-primary);
+      }
+    }
+
+    &-del,
+    &-save,
+    &-cancel {
+      border: 1px solid var(--shs-color-border);
+      border-radius: var(--shs-radius-sm, 4px);
+      background-color: var(--shs-color-bg);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 2px 6px;
+
+      &:hover {
+        border-color: var(--shs-color-danger);
+        color: var(--shs-color-danger);
+      }
+    }
+
+    &-save {
+      &:hover {
+        border-color: var(--shs-color-primary);
+        color: var(--shs-color-primary);
+      }
+    }
+
+    &-input {
+      flex: 1;
+      height: 26px;
+      padding: 0 6px;
+      border: 1px solid var(--shs-color-primary);
+      border-radius: var(--shs-radius-sm, 4px);
+      font-size: 13px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
