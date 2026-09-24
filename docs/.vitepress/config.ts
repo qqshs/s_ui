@@ -46,6 +46,7 @@ export default defineConfig({
           { text: 'DateTimePicker 日期时间', link: '/components/date-time-picker' },
           { text: 'Calendar 日历', link: '/components/calendar' },
           { text: 'Layout 布局', link: '/components/layout' },
+          { text: 'Empty 空状态', link: '/components/empty' },
         ],
       },
     ],

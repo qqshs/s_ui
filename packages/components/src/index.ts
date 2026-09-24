@@ -18,6 +18,7 @@ import { ShsCheckbox, ShsCheckboxGroup } from './checkbox'
 import { ShsDatePicker } from './date-picker'
 import { ShsDateTimePicker } from './date-time-picker'
 import { ShsCalendar } from './calendar'
+import { ShsEmpty } from './empty'
 
 // 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
 //        Radio Checkbox DatePicker DateTimePicker
@@ -44,6 +45,7 @@ const components: Plugin[] = [
   ShsDatePicker,
   ShsDateTimePicker,
   ShsCalendar,
+  ShsEmpty,
 ]
 
 export const install = (app: App) => {
@@ -79,6 +81,7 @@ export {
   ShsDatePicker,
   ShsDateTimePicker,
   ShsCalendar,
+  ShsEmpty,
 }
 export * from './button/props'
 export * from './icon/props'
@@ -103,3 +106,4 @@ export * from './checkbox/types'
 export * from './date-picker/props'
 export * from './date-time-picker/props'
 export * from './calendar/props'
+export * from './empty/props'

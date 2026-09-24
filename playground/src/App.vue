@@ -217,6 +217,17 @@ const calendarEvents = ref([
         </shs-col>
       </shs-row>
     </div>
+
+    <h2>Empty 空状态</h2>
+    <div class="row" style="display: flex; gap: 24px; align-items: flex-start">
+      <shs-empty description="暂无数据" />
+      <shs-empty description="没有更多了" size="large">
+        <template #description>
+          <span style="color: #333">没有更多了</span>
+        </template>
+        <shs-button type="primary" size="small"> 去添加 </shs-button>
+      </shs-empty>
+    </div>
   </div>
 </template>
 
