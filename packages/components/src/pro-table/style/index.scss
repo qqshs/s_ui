@@ -1,0 +1,35 @@
+.shs-pro-table {
+  &__search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-md, 8px);
+  }
+
+  &__search-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__search-label {
+    font-size: 14px;
+    color: var(--shs-color-text);
+    white-space: nowrap;
+  }
+
+  &__search-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+  }
+}

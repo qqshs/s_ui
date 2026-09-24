@@ -57,6 +57,53 @@ const calendarEvents = ref([
   { id: '1', date: '2026-09-23', title: '开会' },
   { id: '2', date: '2026-09-24', title: '出差' },
 ])
+const tabsActive = ref('a')
+const tabs = [
+  { name: 'a', label: '标签A' },
+  { name: 'b', label: '标签B' },
+  { name: 'c', label: '标签C' },
+]
+const uploadFiles = ref([])
+const proFormFields = [
+  { prop: 'name', label: '姓名', required: true },
+  {
+    prop: 'city',
+    label: '城市',
+    type: 'select',
+    options: [
+      { label: '北京', value: 'bj' },
+      { label: '上海', value: 'sh' },
+    ],
+  },
+  { prop: 'remark', label: '备注', type: 'textarea' },
+]
+const proFormData = ref({})
+const proTableColumns = [
+  { prop: 'name', label: '姓名' },
+  { prop: 'age', label: '年龄' },
+  { prop: 'city', label: '城市' },
+]
+const proTableData = ref([
+  { name: '张三', age: 28, city: '北京' },
+  { name: '李四', age: 32, city: '上海' },
+  { name: '王五', age: 25, city: '深圳' },
+])
+const proTableSearchFields = [{ prop: 'keyword', label: '关键词' }]
+const proTablePage = ref(1)
+const proTableTotal = ref(3)
+const onProTableSearch = (params: Record<string, unknown>) => {
+  console.log('查询：', params)
+}
+const onProFormSubmit = (data: Record<string, unknown>, valid: boolean) => {
+  if (valid) alert(`提交成功：${JSON.stringify(data)}`)
+}
+const treeData = [
+  {
+    label: '节点A',
+    children: [{ label: 'A-1' }, { label: 'A-2', children: [{ label: 'A-2-1' }] }],
+  },
+  { label: '节点B' },
+]
 </script>
 
 <template>
@@ -228,6 +275,44 @@ const calendarEvents = ref([
         <shs-button type="primary" size="small"> 去添加 </shs-button>
       </shs-empty>
     </div>
+
+    <h2>Tabs 标签页</h2>
+    <shs-tabs v-model="tabsActive" :tabs="tabs">
+      <template #pane-a>
+        <div>面板 A 内容</div>
+      </template>
+      <template #pane-b>
+        <div>面板 B 内容</div>
+      </template>
+      <template #pane-c>
+        <div>面板 C 内容</div>
+      </template>
+    </shs-tabs>
+
+    <h2>Tree 树形控件</h2>
+    <shs-tree :data="treeData" default-expand-all style="width: 260px" />
+
+    <h2>Upload 上传</h2>
+    <shs-upload v-model="uploadFiles" multiple style="width: 320px" />
+
+    <h2>ProForm 高级表单</h2>
+    <shs-pro-form
+      v-model="proFormData"
+      :fields="proFormFields"
+      style="width: 520px"
+      @submit="onProFormSubmit"
+    />
+
+    <h2>ProTable 高级表格</h2>
+    <shs-pro-table
+      v-model:current-page="proTablePage"
+      :columns="proTableColumns"
+      :data-source="proTableData"
+      :search-fields="proTableSearchFields"
+      :total="proTableTotal"
+      border
+      @search="onProTableSearch"
+    />
   </div>
 </template>
 
