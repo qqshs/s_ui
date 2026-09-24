@@ -85,7 +85,7 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
 <template>
   <div ref="rootRef" class="shs-date-picker">
     <div class="shs-date-picker__input" :class="{ 'is-disabled': disabled }" @click="openPanel">
-      <span :class="{ 'shs-date-picker__placeholder': !modelValue }">
+      <span class="shs-date-picker__text" :class="{ 'shs-date-picker__placeholder': !modelValue }">
         {{ modelValue || placeholder }}
       </span>
       <shs-icon v-if="clearable && modelValue" name="close" :size="14" @click.stop="clear" />
