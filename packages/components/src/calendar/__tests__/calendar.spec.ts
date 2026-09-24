@@ -115,4 +115,15 @@ describe('ShsCalendar', () => {
     await openPopover(wrapper)
     expect(wrapper.find('.shs-calendar__popover-lunar').text()).toContain('秋分')
   })
+
+  it('空(补位)格显示相邻月日期', () => {
+    const wrapper = mount(ShsCalendar)
+    const adj = wrapper.findAll('.shs-calendar__day--adjacent')
+    expect(adj.length).toBeGreaterThan(0)
+    for (const el of adj) {
+      const n = Number(el.text())
+      expect(n).toBeGreaterThan(0)
+      expect(n).toBeLessThanOrEqual(31)
+    }
+  })
 })

@@ -127,6 +127,11 @@
     height: 18px;
     line-height: 18px;
     font-weight: 500;
+
+    &--adjacent {
+      color: var(--shs-color-text-disabled, #d1d5db);
+      font-weight: 400;
+    }
   }
 
   &__todos-mini {

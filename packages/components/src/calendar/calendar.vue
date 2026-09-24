@@ -65,6 +65,14 @@ const lunarCellLabel = (y: number, m: number, d: number) => {
 const isTermDay = (y: number, m: number, d: number) => solarTermOf(y, m + 1, d) !== null
 const solarLabel = (y: number, m: number, d: number) => (d === 1 ? `${m + 1}月${d}日` : `${d}日`)
 
+const adjacentDate = (i: number) => {
+  if (i < firstDayOffset.value) {
+    const prevDays = new Date(viewYear.value, viewMonth.value, 0).getDate()
+    return prevDays - firstDayOffset.value + i + 1
+  }
+  return i - firstDayOffset.value - daysInMonth.value + 1
+}
+
 const isSelected = (d: number) =>
   selectedDate.value === formatDate(viewYear.value, viewMonth.value, d)
 const isToday = (d: number) => today === formatDate(viewYear.value, viewMonth.value, d)
@@ -170,30 +178,34 @@ onBeforeUnmount(() => document.removeEventListener('click', onClickOutside))
           }"
           @click="d !== null && selectDate(d)"
         >
-          <span
-            v-if="d !== null"
-            class="shs-calendar__lunar"
-            :class="{ 'has-term': isTermDay(viewYear, viewMonth, d) }"
-          >
-            {{ lunarCellLabel(viewYear, viewMonth, d) }}
-          </span>
-          <span v-if="d !== null" class="shs-calendar__day">
-            {{ solarLabel(viewYear, viewMonth, d) }}
-          </span>
-          <span
-            v-if="d !== null && dayItems(viewYear, viewMonth, d).items.length > 0"
-            class="shs-calendar__todos-mini"
-          >
+          <template v-if="d !== null">
             <span
-              v-for="item in dayItems(viewYear, viewMonth, d).items"
-              :key="item.id"
-              class="shs-calendar__todo-mini"
+              class="shs-calendar__lunar"
+              :class="{ 'has-term': isTermDay(viewYear, viewMonth, d) }"
             >
-              {{ item.title }}
+              {{ lunarCellLabel(viewYear, viewMonth, d) }}
             </span>
-            <span v-if="dayItems(viewYear, viewMonth, d).more > 0" class="shs-calendar__more">
-              更多{{ dayItems(viewYear, viewMonth, d).more }}
+            <span class="shs-calendar__day">
+              {{ solarLabel(viewYear, viewMonth, d) }}
             </span>
+            <span
+              v-if="dayItems(viewYear, viewMonth, d).items.length > 0"
+              class="shs-calendar__todos-mini"
+            >
+              <span
+                v-for="item in dayItems(viewYear, viewMonth, d).items"
+                :key="item.id"
+                class="shs-calendar__todo-mini"
+              >
+                {{ item.title }}
+              </span>
+              <span v-if="dayItems(viewYear, viewMonth, d).more > 0" class="shs-calendar__more">
+                更多{{ dayItems(viewYear, viewMonth, d).more }}
+              </span>
+            </span>
+          </template>
+          <span v-else class="shs-calendar__day shs-calendar__day--adjacent">
+            {{ adjacentDate(i) }}
           </span>
         </span>
       </div>
