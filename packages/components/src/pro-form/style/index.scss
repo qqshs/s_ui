@@ -1,0 +1,54 @@
+.shs-pro-form {
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  &__label {
+    width: 80px;
+    padding-top: 6px;
+    font-size: 14px;
+    color: var(--shs-color-text);
+    flex-shrink: 0;
+  }
+
+  &__required {
+    color: var(--shs-color-danger);
+    margin-right: 2px;
+  }
+
+  &__control {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__textarea {
+    width: 100%;
+    min-height: 72px;
+    padding: 8px 10px;
+    border: 1px solid var(--shs-color-border);
+    border-radius: var(--shs-radius-sm, 6px);
+    font-size: 14px;
+    background-color: var(--shs-color-bg);
+    color: var(--shs-color-text);
+    resize: vertical;
+
+    &:focus {
+      outline: none;
+      border-color: var(--shs-color-primary);
+    }
+  }
+
+  &__error {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--shs-color-danger);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    padding-left: 80px;
+  }
+}
