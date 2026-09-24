@@ -48,6 +48,8 @@ const cells = computed<(number | null)[]>(() => {
   const list: (number | null)[] = []
   for (let i = 0; i < firstDayOffset.value; i++) list.push(null)
   for (let d = 1; d <= daysInMonth.value; d++) list.push(d)
+  const tail = (7 - ((firstDayOffset.value + daysInMonth.value) % 7)) % 7
+  for (let i = 0; i < tail; i++) list.push(null)
   return list
 })
 

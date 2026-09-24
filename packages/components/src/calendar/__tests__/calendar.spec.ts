@@ -116,8 +116,11 @@ describe('ShsCalendar', () => {
     expect(wrapper.find('.shs-calendar__popover-lunar').text()).toContain('秋分')
   })
 
-  it('空(补位)格显示相邻月日期', () => {
+  it('空(补位)格显示相邻月日期（含下月尾部补格）', () => {
     const wrapper = mount(ShsCalendar)
+    // 补位到完整 7 列行，尾部下月补格存在
+    const cells = wrapper.findAll('.shs-calendar__cell')
+    expect(cells.length % 7).toBe(0)
     const adj = wrapper.findAll('.shs-calendar__day--adjacent')
     expect(adj.length).toBeGreaterThan(0)
     for (const el of adj) {
