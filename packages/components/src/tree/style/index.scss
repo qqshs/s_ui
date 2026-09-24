@@ -1,0 +1,51 @@
+.shs-tree {
+  font-size: 14px;
+
+  &__node {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding-right: 12px;
+    cursor: pointer;
+    border-radius: var(--shs-radius-sm, 4px);
+    transition: background-color 0.2s;
+
+    &:hover:not(.is-disabled) {
+      background-color: color-mix(in srgb, var(--shs-color-primary) 6%, transparent);
+    }
+
+    &.is-selected {
+      color: var(--shs-color-primary);
+      font-weight: 600;
+    }
+
+    &.is-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__arrow {
+    width: 16px;
+    font-size: 14px;
+    color: var(--shs-color-text-secondary, #9ca3af);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    text-align: center;
+
+    &.is-open {
+      transform: rotate(90deg);
+    }
+
+    &.is-leaf {
+      visibility: hidden;
+    }
+  }
+
+  &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
