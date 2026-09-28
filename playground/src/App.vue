@@ -88,6 +88,20 @@ const removeTab = (name: string) => {
   if (folderActive.value === name)
     folderActive.value = folderTabs.value[i]?.name ?? folderTabs.value[i - 1]?.name ?? ''
 }
+const routeActive = ref('profile')
+const routeTabs = ref([
+  { name: 'profile', label: '个人中心' },
+  { name: 'form', label: '基础表单页' },
+  { name: 'list', label: '列表页' },
+  { name: 'detail', label: '详情页' },
+])
+const removeRouteTab = (name: string) => {
+  const i = routeTabs.value.findIndex((t) => t.name === name)
+  if (i === -1) return
+  routeTabs.value.splice(i, 1)
+  if (routeActive.value === name)
+    routeActive.value = routeTabs.value[i]?.name ?? routeTabs.value[i - 1]?.name ?? ''
+}
 const uploadFiles = ref([])
 const proFormFields = [
   { prop: 'name', label: '姓名', required: true },
@@ -347,6 +361,20 @@ const onThemeApply = (color: string) => message.success(`主题色已切换为 $
     </shs-tabs>
     <p style="font-size: 13px; color: #6b7280">
       当标签超出容器宽度时，两侧出现左右滑动按钮；悬停标签可看到关闭按钮，点击可关闭当前页签。
+    </p>
+
+    <h2>Tabs 多页签式（tags-view，管理后台页签栏）</h2>
+    <shs-tabs v-model="routeActive" type="tags" :tabs="routeTabs" closable @close="removeRouteTab">
+      <template #home>
+        <shs-icon name="home" :size="16" @click="message.info('回到首页')" />
+      </template>
+      <template v-for="t in routeTabs" :key="t.name" #[`pane-${t.name}`]>
+        <div style="padding: 16px">“{{ t.label }}”面板内容</div>
+      </template>
+    </shs-tabs>
+    <p style="font-size: 13px; color: #6b7280">
+      浅灰页签栏 + 白色激活项 + 竖线分隔；左侧 home 图标通过 #home
+      插槽传入，常用于管理后台多页签导航。
     </p>
 
     <h2>Tree 树形控件</h2>

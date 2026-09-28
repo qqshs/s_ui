@@ -133,6 +133,71 @@
     }
   }
 
+  // ---- 多页签式（tags-view，管理后台页签栏）----
+  &--tags {
+    .shs-tabs__header {
+      align-items: stretch;
+      height: 40px;
+      padding: 0;
+      background-color: #f0f2f5;
+      border-bottom: 1px solid var(--shs-color-border);
+    }
+
+    .shs-tabs__home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      flex-shrink: 0;
+      background-color: var(--shs-color-bg);
+      border-right: 1px solid var(--shs-color-border);
+      color: var(--shs-color-primary);
+      cursor: pointer;
+    }
+
+    .shs-tabs__nav-scroll {
+      align-items: stretch;
+    }
+
+    .shs-tabs__tab {
+      align-items: center;
+      height: 40px;
+      margin-bottom: 0;
+      padding: 0 18px;
+      font-size: var(--shs-font-size-md);
+      font-weight: normal;
+      color: var(--shs-color-text-secondary);
+      background-color: transparent;
+      border: none;
+      border-right: 1px solid var(--shs-color-border);
+      border-radius: 0;
+
+      &:hover:not(.is-disabled):not(.is-active) {
+        color: var(--shs-color-text);
+      }
+
+      &.is-active {
+        color: var(--shs-color-text);
+        background-color: var(--shs-color-bg);
+        font-weight: 500;
+        border-right-color: var(--shs-color-border);
+        box-shadow: none;
+      }
+
+      .shs-tabs__close {
+        margin-left: 2px;
+      }
+    }
+
+    .shs-tabs__nav-btn {
+      align-self: center;
+    }
+
+    .shs-tabs__content {
+      padding: 0;
+    }
+  }
+
   // ---- 导航滑动按钮 ----
   &__nav-btn {
     display: inline-flex;

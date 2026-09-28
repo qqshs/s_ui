@@ -94,6 +94,19 @@ describe('ShsTabs', () => {
       expect(wrapper.classes()).toContain('shs-tabs--card')
     })
 
+    it('tags 类型添加多页签样式类', () => {
+      const wrapper = mount(ShsTabs, { props: { modelValue: 'a', tabs, type: 'tags' } })
+      expect(wrapper.classes()).toContain('shs-tabs--tags')
+    })
+
+    it('传入 home 插槽时渲染首页入口', () => {
+      const wrapper = mount(ShsTabs, {
+        props: { modelValue: 'a', tabs, type: 'tags' },
+        slots: { home: '<span class="home-dot" />' },
+      })
+      expect(wrapper.find('.shs-tabs__home .home-dot').exists()).toBe(true)
+    })
+
     it('包含可滚动导航容器与滑动按钮结构', () => {
       const wrapper = mount(ShsTabs, { props: { modelValue: 'a', tabs } })
       expect(wrapper.find('.shs-tabs__nav-scroll').exists()).toBe(true)

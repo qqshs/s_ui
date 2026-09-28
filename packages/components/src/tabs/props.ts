@@ -11,7 +11,7 @@ export interface TabItem {
   closable?: boolean
 }
 
-export type TabsType = 'line' | 'card' | 'folder'
+export type TabsType = 'line' | 'card' | 'folder' | 'tags'
 
 export const tabsProps = {
   /** 当前激活的 tab 名称（v-model） */
@@ -24,7 +24,7 @@ export const tabsProps = {
     type: Array as PropType<TabItem[]>,
     default: () => [],
   },
-  /** 样式类型：line 下划线 / card 卡片 / folder 文件夹 */
+  /** 样式类型：line 下划线 / card 卡片 / folder 文件夹 / tags 多页签（tags-view） */
   type: {
     type: String as PropType<TabsType>,
     default: 'line',

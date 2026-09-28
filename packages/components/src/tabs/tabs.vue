@@ -76,6 +76,9 @@ onBeforeUnmount(() => {
 <template>
   <div class="shs-tabs" :class="`shs-tabs--${type}`">
     <div class="shs-tabs__header">
+      <div v-if="$slots.home" class="shs-tabs__home">
+        <slot name="home" />
+      </div>
       <button
         v-show="hasOverflow"
         type="button"
