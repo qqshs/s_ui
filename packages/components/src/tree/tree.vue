@@ -80,6 +80,17 @@ const select = (node: TreeNode) => {
       :style="{ paddingLeft: `${row.depth * 18 + 8}px` }"
       @click="select(row.node)"
     >
+      <template v-if="props.showLine && row.depth > 0">
+        <!-- 竖向连接线：在每个祖先层级各画一段，保证从根节点连续贯穿到当前层 -->
+        <i
+          v-for="level in row.depth"
+          :key="'v-' + level"
+          class="shs-tree__line-v"
+          :style="{ left: `${(level - 1) * 18 + 16}px` }"
+        />
+        <!-- 横向连接线：连接父级连接点到当前节点箭头 -->
+        <i class="shs-tree__line-h" :style="{ left: `${(row.depth - 1) * 18 + 16}px` }" />
+      </template>
       <span
         class="shs-tree__arrow"
         :class="{

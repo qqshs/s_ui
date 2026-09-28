@@ -1,0 +1,320 @@
+.shs-theme-setting {
+  display: inline-flex;
+}
+
+.shs-theme-setting__trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--shs-color-border);
+  border-radius: 50%;
+  background-color: var(--shs-color-bg);
+  color: var(--shs-color-text);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+
+  &:hover {
+    border-color: var(--shs-color-primary);
+    color: var(--shs-color-primary);
+    box-shadow: var(--shs-shadow-sm);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
+/* 触发按钮右下角显示当前主题色小圆点 */
+.shs-theme-setting__dot {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--shs-color-bg);
+  box-sizing: content-box;
+}
+
+.shs-theme-setting__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shs-space-sm);
+}
+
+.shs-theme-setting__label {
+  margin: var(--shs-space-xs) 0 0;
+  font-size: var(--shs-font-size-sm);
+  color: var(--shs-color-text-secondary);
+}
+
+.shs-theme-setting__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--shs-space-sm);
+}
+
+.shs-theme-setting__swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shs-shadow-sm);
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.is-active {
+    border-color: #fff;
+    box-shadow:
+      0 0 0 2px var(--shs-color-primary),
+      var(--shs-shadow-sm);
+  }
+}
+
+.shs-theme-setting__custom {
+  display: flex;
+  align-items: center;
+  gap: var(--shs-space-sm);
+}
+
+.shs-theme-setting__picker {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--shs-radius-sm);
+  background: none;
+  cursor: pointer;
+}
+
+.shs-theme-setting__hex {
+  font-size: var(--shs-font-size-sm);
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  color: var(--shs-color-text);
+}
+
+/* ---- 后台管理系统主页预览 ---- */
+.shs-theme-setting__admin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-md);
+  background-color: var(--shs-color-bg);
+  box-shadow: var(--shs-shadow-sm);
+  overflow: hidden;
+}
+
+.shs-admin-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--shs-space-sm);
+  padding: var(--shs-space-xs) var(--shs-space-sm);
+  border-bottom: 1px solid var(--shs-color-border);
+  background-color: var(--shs-color-bg);
+}
+
+/* 顶栏品牌：主色占位块（无文字） */
+.shs-admin-nav__brand {
+  display: inline-block;
+  width: 48px;
+  height: 12px;
+  border-radius: 4px;
+  background-color: var(--shs-color-primary);
+  opacity: 0.9;
+}
+
+/* 顶栏面包屑占位条 */
+.shs-admin-nav__bar {
+  flex: 1;
+  height: 7px;
+  border-radius: 3px;
+  background-color: var(--shs-color-border);
+}
+
+/* 顶栏头像：主色圆点（无文字） */
+.shs-admin-nav__avatar {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--shs-color-primary);
+}
+
+.shs-admin-layout {
+  display: flex;
+  height: 200px;
+}
+
+.shs-admin-side {
+  width: 92px;
+  flex-shrink: 0;
+  padding: var(--shs-space-sm) var(--shs-space-xs);
+  background-color: var(--shs-color-bg-hover);
+}
+
+.shs-admin-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* 侧边栏菜单项：主题色占位条（当前项实心，随主题色变化） */
+.shs-admin-menu__item {
+  height: 14px;
+  border-radius: var(--shs-radius-sm);
+  background-color: var(--shs-color-primary);
+  opacity: 0.3;
+
+  &.is-active {
+    opacity: 1;
+  }
+}
+
+.shs-admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: var(--shs-space-sm);
+  background-color: var(--shs-color-bg-hover);
+  overflow: hidden;
+}
+
+.shs-admin-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--shs-space-xs);
+}
+
+.shs-admin-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--shs-space-xs) var(--shs-space-sm);
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-sm);
+  background-color: var(--shs-color-bg);
+}
+
+/* 统计卡片数字占位条（主色）、标签占位条（灰色） */
+.shs-admin-card__num {
+  display: block;
+  width: 62%;
+  height: 11px;
+  border-radius: 3px;
+  background-color: var(--shs-color-primary);
+  opacity: 0.85;
+}
+
+.shs-admin-card__label {
+  display: block;
+  width: 78%;
+  height: 7px;
+  border-radius: 3px;
+  background-color: var(--shs-color-border);
+}
+
+.shs-admin-toolbar {
+  display: flex;
+  gap: var(--shs-space-xs);
+  margin: var(--shs-space-sm) 0;
+}
+
+/* 操作区按钮占位块：主色实心 / 描边 */
+.shs-admin-btn {
+  display: inline-block;
+  width: 56px;
+  height: 22px;
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-sm);
+  background-color: var(--shs-color-bg);
+
+  &.is-primary {
+    border-color: transparent;
+    background-color: var(--shs-color-primary);
+  }
+}
+
+.shs-admin-table {
+  border: 1px solid var(--shs-color-border);
+  border-radius: var(--shs-radius-sm);
+  background-color: var(--shs-color-bg);
+  overflow: hidden;
+}
+
+.shs-admin-table__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: var(--shs-space-xs);
+  padding: 7px var(--shs-space-sm);
+
+  & + & {
+    border-top: 1px solid var(--shs-color-border);
+  }
+
+  &.is-head {
+    background-color: color-mix(in srgb, var(--shs-color-border) 30%, transparent);
+  }
+}
+
+/* 表格单元格占位条 */
+.shs-admin-table__bar {
+  display: block;
+  height: 8px;
+  width: 58%;
+  border-radius: 3px;
+  background-color: var(--shs-color-border);
+
+  .shs-admin-table__row.is-head & {
+    background-color: var(--shs-color-text-placeholder);
+  }
+
+  &.is-tag {
+    width: 46%;
+    height: 12px;
+    border-radius: 6px;
+    background-color: var(--shs-color-primary);
+    opacity: 0.7;
+  }
+
+  &.is-link {
+    width: 32%;
+    background-color: var(--shs-color-primary);
+    opacity: 0.85;
+  }
+}
+
+/* 页脚：版权 / 版本 */
+.shs-admin-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px var(--shs-space-sm);
+  border-top: 1px solid var(--shs-color-border);
+  background-color: var(--shs-color-bg);
+  font-size: 10px;
+  color: var(--shs-color-text-secondary);
+}
+
+.shs-admin-footer__version {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+}

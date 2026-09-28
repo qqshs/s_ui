@@ -1,11 +1,28 @@
 .shs-tabs {
   &__header {
     display: flex;
-    gap: 4px;
+    align-items: flex-end;
+    gap: 0;
     border-bottom: 1px solid var(--shs-color-border);
   }
 
+  &__nav-scroll {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
     padding: 8px 16px;
     font-size: 14px;
     color: var(--shs-color-text);
@@ -14,7 +31,9 @@
     margin-bottom: -1px;
     transition:
       color 0.2s,
-      border-color 0.2s;
+      border-color 0.2s,
+      background-color 0.2s,
+      box-shadow 0.2s;
 
     &:hover:not(.is-disabled):not(.is-active) {
       color: var(--shs-color-primary);
@@ -32,21 +51,115 @@
     }
   }
 
+  &__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: var(--shs-color-text-placeholder);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    &:hover {
+      background-color: var(--shs-color-border);
+      color: var(--shs-color-text);
+    }
+  }
+
   &__content {
     padding: 16px 0;
   }
 
+  // ---- 卡片式 ----
   &--card {
     .shs-tabs__tab {
       border: 1px solid var(--shs-color-border);
       border-bottom: none;
       border-radius: var(--shs-radius-sm, 4px) var(--shs-radius-sm, 4px) 0 0;
-      margin-bottom: -1px;
 
       &.is-active {
         background-color: var(--shs-color-bg);
         border-bottom-color: var(--shs-color-bg);
       }
+    }
+  }
+
+  // ---- 文件夹式 ----
+  &--folder {
+    border: 1px solid var(--shs-color-border);
+    background-color: var(--shs-color-bg);
+
+    .shs-tabs__header {
+      border-bottom: none;
+      background-color: var(--shs-color-bg-hover);
+      padding: 8px 8px 0;
+    }
+
+    .shs-tabs__tab {
+      position: relative;
+      margin: 0 0 0 -8px;
+      padding: 8px 20px;
+      background-color: var(--shs-color-bg-hover);
+      color: var(--shs-color-text-secondary);
+      border: 1px solid var(--shs-color-border);
+      border-bottom-color: var(--shs-color-border);
+      // 直角矩形，页签之间直角相接
+      z-index: 1;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:hover:not(.is-disabled):not(.is-active) {
+        background-color: var(--shs-color-bg);
+        color: var(--shs-color-text);
+      }
+
+      &.is-active {
+        background-color: var(--shs-color-bg);
+        color: var(--shs-color-primary);
+        font-weight: 600;
+        border-bottom-color: var(--shs-color-bg);
+        z-index: 2;
+        box-shadow: 0 -2px 6px rgb(0 0 0 / 0.06);
+      }
+    }
+
+    .shs-tabs__content {
+      padding: 16px;
+    }
+  }
+
+  // ---- 导航滑动按钮 ----
+  &__nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    align-self: center;
+    margin: 0 2px;
+    border: none;
+    background: transparent;
+    color: var(--shs-color-text-secondary);
+    cursor: pointer;
+    border-radius: var(--shs-radius-sm);
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    &:hover:not(:disabled) {
+      background-color: var(--shs-color-bg-hover);
+      color: var(--shs-color-primary);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
     }
   }
 }

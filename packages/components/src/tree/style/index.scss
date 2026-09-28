@@ -1,7 +1,9 @@
 .shs-tree {
   font-size: 14px;
+  --shs-tree-line-color: var(--shs-color-border, #e5e7eb);
 
   &__node {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -24,6 +26,29 @@
       opacity: 0.5;
       cursor: not-allowed;
     }
+  }
+
+  // 层级连接线：竖向段，在每个祖先层级各画一段，自父节点高度连续贯穿到本节点
+  &__line-v {
+    position: absolute;
+    top: -16px;
+    left: 0;
+    height: 32px;
+    border-left: 1px dashed var(--shs-tree-line-color);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  // 层级连接线：横向段，连接父级连接点到当前节点箭头
+  &__line-h {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 1px;
+    border-top: 1px dashed var(--shs-tree-line-color);
+    pointer-events: none;
+    z-index: 1;
   }
 
   &__arrow {

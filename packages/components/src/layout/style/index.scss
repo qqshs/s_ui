@@ -1,0 +1,14 @@
+.shs-layout {
+  display: flex;
+  flex-direction: column;
+  // 作为外层布局的子级时弹性撑满剩余空间，使 Header/Footer 固定在上下、中间区域自适应
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+
+  // 直接子级包含 ShsAside 时切换为左右布局
+  &.is-has-aside {
+    flex-direction: row;
+  }
+}

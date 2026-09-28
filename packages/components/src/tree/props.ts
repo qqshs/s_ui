@@ -27,6 +27,11 @@ export const treeProps = {
     type: Boolean,
     default: false,
   },
+  /** 是否显示层级虚线连接线 */
+  showLine: {
+    type: Boolean,
+    default: false,
+  },
 } as const
 
 export type TreeProps = typeof treeProps

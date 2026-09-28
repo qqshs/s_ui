@@ -63,6 +63,31 @@ const tabs = [
   { name: 'b', label: '标签B' },
   { name: 'c', label: '标签C' },
 ]
+const folderActive = ref('d')
+const folderTabs = ref([
+  { name: 'd', label: '文档' },
+  { name: 'e', label: '图片' },
+  { name: 'f', label: '视频' },
+  { name: 'g', label: '音乐' },
+  { name: 'h', label: '设置' },
+  { name: 'i', label: '下载' },
+  { name: 'j', label: '收藏' },
+  { name: 'k', label: '历史记录' },
+  { name: 'l', label: '标签九' },
+  { name: 'm', label: '标签十' },
+  { name: 'n', label: '标签十一' },
+  { name: 'o', label: '标签十二' },
+  { name: 'p', label: '标签十三' },
+  { name: 'q', label: '标签十四' },
+  { name: 'r', label: '标签十五' },
+])
+const removeTab = (name: string) => {
+  const i = folderTabs.value.findIndex((t) => t.name === name)
+  if (i === -1) return
+  folderTabs.value.splice(i, 1)
+  if (folderActive.value === name)
+    folderActive.value = folderTabs.value[i]?.name ?? folderTabs.value[i - 1]?.name ?? ''
+}
 const uploadFiles = ref([])
 const proFormFields = [
   { prop: 'name', label: '姓名', required: true },
@@ -104,6 +129,8 @@ const treeData = [
   },
   { label: '节点B' },
 ]
+const treeShowLine = ref(true)
+const onThemeApply = (color: string) => message.success(`主题色已切换为 ${color}`)
 </script>
 
 <template>
@@ -113,6 +140,14 @@ const treeData = [
       M2 组件演示：Button / Icon / Tag / Card / Input / Select / Form / Modal / Message / Table /
       Pagination / Menu / Radio / Checkbox / DatePicker / DateTimePicker / Row / Col
     </p>
+
+    <h2>ThemeSetting 主题设置</h2>
+    <div class="row">
+      <shs-theme-setting @apply="onThemeApply" />
+      <span style="font-size: 13px; color: #6b7280">
+        点击齿轮图标打开主题设置面板 → 选择颜色设置主题色 → 点击「确定」立即全局生效。
+      </span>
+    </div>
 
     <h2>Button</h2>
     <div class="row">
@@ -124,6 +159,13 @@ const treeData = [
       <shs-button type="primary" loading> 加载中 </shs-button>
       <shs-button type="primary" round> 圆角 </shs-button>
     </div>
+    <div class="row">
+      <shs-button type="primary" radius="none"> 无圆角 </shs-button>
+      <shs-button type="primary" radius="small"> 小圆角 </shs-button>
+      <shs-button type="primary"> 中圆角(默认) </shs-button>
+      <shs-button type="primary" radius="large"> 大圆角 </shs-button>
+      <shs-button type="primary" :radius="20"> 20px </shs-button>
+    </div>
 
     <h2>Icon</h2>
     <div class="row">
@@ -134,6 +176,7 @@ const treeData = [
       <shs-icon name="info" :size="18" color="#3b82f6" />
       <shs-icon name="warning" :size="18" color="#f59e0b" />
       <shs-icon name="search" :size="18" />
+      <shs-icon name="settings" :size="18" color="#3b82f6" />
     </div>
 
     <h2>Tag</h2>
@@ -289,8 +332,28 @@ const treeData = [
       </template>
     </shs-tabs>
 
+    <h2>Tabs 文件夹式 + 可关闭 + 溢出滑动</h2>
+    <shs-tabs
+      v-model="folderActive"
+      type="folder"
+      :tabs="folderTabs"
+      closable
+      style="max-width: 720px"
+      @close="removeTab"
+    >
+      <template v-for="t in folderTabs" :key="t.name" #[`pane-${t.name}`]>
+        <div>“{{ t.label }}”面板内容</div>
+      </template>
+    </shs-tabs>
+    <p style="font-size: 13px; color: #6b7280">
+      当标签超出容器宽度时，两侧出现左右滑动按钮；悬停标签可看到关闭按钮，点击可关闭当前页签。
+    </p>
+
     <h2>Tree 树形控件</h2>
-    <shs-tree :data="treeData" default-expand-all style="width: 260px" />
+    <shs-tree :data="treeData" default-expand-all :show-line="treeShowLine" style="width: 260px" />
+    <p style="font-size: 13px; color: #6b7280">
+      <label><input v-model="treeShowLine" type="checkbox" /> 显示虚线连接线</label>
+    </p>
 
     <h2>Upload 上传</h2>
     <shs-upload v-model="uploadFiles" multiple style="width: 320px" />
@@ -313,6 +376,75 @@ const treeData = [
       border
       @search="onProTableSearch"
     />
+
+    <h2>Watermark 水印</h2>
+    <shs-watermark content="shs_ui 内部资料" :font-size="16" :rotate="-22">
+      <div
+        style="border: 1px dashed #d1d5db; background: #fff; padding: 28px 20px; min-height: 130px"
+      >
+        <p>这是一段被文字水印覆盖的内容区域。</p>
+        <p style="color: #6b7280">
+          水印默认跟随容器尺寸；可通过 gapX / gapY / rotate / opacity 调节密度与角度，content
+          支持数组表示多行，也可传 image 使用图片水印，或 full-screen 全屏铺满。
+        </p>
+      </div>
+    </shs-watermark>
+
+    <h2>Layout 容器布局</h2>
+    <shs-layout
+      style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; height: 320px"
+    >
+      <shs-header :height="48" style="background: #eef2ff; padding: 0 16px">
+        Header（height=48）
+      </shs-header>
+      <shs-layout>
+        <shs-aside :width="160" style="background: #f9fafb; padding: 12px">
+          Aside（width=160）
+        </shs-aside>
+        <shs-content style="padding: 16px">
+          Content —— 检测到 Aside 时 Layout 自动切换为左右布局。
+        </shs-content>
+      </shs-layout>
+      <shs-footer :height="44"> Footer（height=44） </shs-footer>
+    </shs-layout>
+
+    <h2>Layout 容器布局（侧边栏全高）</h2>
+    <shs-layout
+      style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; height: 320px"
+    >
+      <shs-aside :width="160" style="background: #f9fafb; padding: 12px">
+        Aside（全高，width=160）
+      </shs-aside>
+      <shs-layout>
+        <shs-header :height="48" style="background: #eef2ff; padding: 0 16px">
+          Header（height=48）
+        </shs-header>
+        <shs-content style="padding: 16px">
+          Content —— 右侧纵向：Header / Content / Footer。
+        </shs-content>
+        <shs-footer :height="44"> Footer（height=44） </shs-footer>
+      </shs-layout>
+    </shs-layout>
+
+    <h2>Layout 容器布局（头部全宽）</h2>
+    <shs-layout
+      style="border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; height: 320px"
+    >
+      <shs-header :height="48" style="background: #eef2ff; padding: 0 16px">
+        Header（全宽，height=48）
+      </shs-header>
+      <shs-layout>
+        <shs-aside :width="160" style="background: #f9fafb; padding: 12px">
+          Aside（width=160）
+        </shs-aside>
+        <shs-layout>
+          <shs-content style="padding: 16px">
+            Content —— 头部下左侧区域 + 右侧主区 / 底部。
+          </shs-content>
+          <shs-footer :height="44"> Footer（height=44） </shs-footer>
+        </shs-layout>
+      </shs-layout>
+    </shs-layout>
   </div>
 </template>
 

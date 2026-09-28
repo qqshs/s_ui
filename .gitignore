@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # coverage
 coverage/
+
+# npm publish token / 本地发布配置（不得提交）
+.npmrc
+
+# docs build cache
+docs/.vitepress/cache/

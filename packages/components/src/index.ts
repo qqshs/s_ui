@@ -24,6 +24,13 @@ import { ShsTree } from './tree'
 import { ShsUpload } from './upload'
 import { ShsProForm } from './pro-form'
 import { ShsProTable } from './pro-table'
+import { ShsThemeSetting } from './theme-setting'
+import { ShsWatermark } from './watermark'
+import { ShsLayout } from './layout'
+import { ShsHeader } from './header'
+import { ShsAside } from './aside'
+import { ShsContent } from './content'
+import { ShsFooter } from './footer'
 
 // 组件：Button Icon Tag Input Form Select Modal Message Table Pagination Card Layout Menu
 //        Radio Checkbox DatePicker DateTimePicker
@@ -56,6 +63,13 @@ const components: Plugin[] = [
   ShsUpload,
   ShsProForm,
   ShsProTable,
+  ShsThemeSetting,
+  ShsWatermark,
+  ShsLayout,
+  ShsHeader,
+  ShsAside,
+  ShsContent,
+  ShsFooter,
 ]
 
 export const install = (app: App) => {
@@ -97,6 +111,13 @@ export {
   ShsUpload,
   ShsProForm,
   ShsProTable,
+  ShsThemeSetting,
+  ShsWatermark,
+  ShsLayout,
+  ShsHeader,
+  ShsAside,
+  ShsContent,
+  ShsFooter,
 }
 export * from './button/props'
 export * from './icon/props'
@@ -127,3 +148,10 @@ export * from './tree/props'
 export * from './upload/props'
 export * from './pro-form/props'
 export * from './pro-table/props'
+export * from './theme-setting/props'
+export * from './watermark/props'
+export * from './layout/props'
+export * from './header/props'
+export * from './aside/props'
+export * from './content/props'
+export * from './footer/props'

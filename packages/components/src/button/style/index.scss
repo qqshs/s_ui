@@ -4,15 +4,28 @@
   justify-content: center;
   gap: var(--shs-space-xs);
   border: 1px solid transparent;
-  border-radius: var(--shs-radius-md);
+  border-radius: var(--shs-button-radius, var(--shs-radius-md));
   font-size: var(--shs-font-size-md);
   line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
+  box-shadow: var(--shs-shadow-sm);
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.1s ease;
+
+  &:hover {
+    box-shadow: var(--shs-shadow-md);
+  }
+
+  /* 按压效果：按下时下压位移 + 轻微缩放 + 阴影消失（陷下去） */
+  &:active:not(:disabled):not(.is-disabled) {
+    transform: translateY(2px) scale(0.97);
+    box-shadow: none;
+  }
 
   &--small {
     font-size: var(--shs-font-size-xs);
@@ -35,6 +48,10 @@
     &:hover {
       background-color: var(--shs-color-primary-hover);
     }
+
+    &:active:not(:disabled):not(.is-disabled) {
+      background-color: var(--shs-color-primary-active);
+    }
   }
 
   &--default {
@@ -46,26 +63,47 @@
       border-color: var(--shs-color-primary);
       color: var(--shs-color-primary);
     }
+
+    &:active:not(:disabled):not(.is-disabled) {
+      border-color: var(--shs-color-primary-active);
+      color: var(--shs-color-primary-active);
+    }
   }
 
   &--success {
     background-color: var(--shs-color-success);
     color: #fff;
+
+    &:active:not(:disabled):not(.is-disabled) {
+      background-color: var(--shs-color-success-active);
+    }
   }
 
   &--warning {
     background-color: var(--shs-color-warning);
     color: #fff;
+
+    &:active:not(:disabled):not(.is-disabled) {
+      background-color: var(--shs-color-warning-active);
+    }
   }
 
   &--danger {
     background-color: var(--shs-color-danger);
     color: #fff;
+
+    &:active:not(:disabled):not(.is-disabled) {
+      background-color: var(--shs-color-danger-active);
+    }
   }
 
   &--info {
     background-color: var(--shs-color-info);
     color: #fff;
+
+    &:active:not(:disabled):not(.is-disabled) {
+      background-color: var(--shs-color-info-active);
+    }
   }
 
   &.is-disabled,

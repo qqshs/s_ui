@@ -1,0 +1,10 @@
+.shs-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--shs-space-md);
+  flex-shrink: 0;
+  background-color: var(--shs-color-bg);
+  border-bottom: 1px solid var(--shs-color-border);
+  color: var(--shs-color-text);
+  font-size: var(--shs-font-size-lg);
+}

@@ -1,0 +1,8 @@
+.shs-content {
+  flex: 1;
+  min-height: 0;
+  padding: var(--shs-space-lg);
+  background-color: var(--shs-color-bg);
+  color: var(--shs-color-text);
+  overflow-y: auto;
+}

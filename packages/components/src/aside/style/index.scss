@@ -1,0 +1,10 @@
+.shs-aside {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-height: 0;
+  padding: var(--shs-space-sm);
+  background-color: var(--shs-color-bg-hover);
+  border-right: 1px solid var(--shs-color-border);
+  overflow-y: auto;
+}

@@ -2,6 +2,7 @@ import type { PropType } from 'vue'
 
 export type ButtonType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
 export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonRadius = 'none' | 'small' | 'medium' | 'large'
 
 export const buttonProps = {
   /** 按钮类型 */
@@ -28,6 +29,11 @@ export const buttonProps = {
   loading: {
     type: Boolean,
     default: false,
+  },
+  /** 四角圆角弧度：预设 none/small/medium/large，或传入数字作为像素值（round 优先） */
+  radius: {
+    type: [String, Number] as PropType<ButtonRadius | number>,
+    default: 'medium',
   },
   /** 是否为圆角按钮 */
   round: {

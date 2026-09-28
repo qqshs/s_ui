@@ -43,6 +43,20 @@ const treeData = [
 const treeData = [{ label: '节点B', disabled: true }]
 ```
 
+## 显示连接线
+
+设置 `show-line` 后，节点间会显示虚线连接线，清晰地表达层级关系。
+
+```vue
+<shs-tree :data="treeData" show-line />
+```
+
+连接线颜色默认使用主题边框色，可通过 CSS 变量 `--shs-tree-line-color` 单独调整：
+
+```vue
+<shs-tree :data="treeData" show-line style="--shs-tree-line-color: #c0c4cc" />
+```
+
 ## API
 
 | 属性 | 说明 | 类型 | 默认值 |
@@ -50,6 +64,7 @@ const treeData = [{ label: '节点B', disabled: true }]
 | data | 树形数据 | `TreeNode[]` | `[]` |
 | modelValue | 当前选中节点标识（v-model） | `string` | `''` |
 | defaultExpandAll | 是否默认展开所有含子节点的项 | `boolean` | `false` |
+| showLine | 是否显示层级虚线连接线 | `boolean` | `false` |
 
 | 事件 | 说明 |
 | --- | --- |

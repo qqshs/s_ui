@@ -30,6 +30,16 @@ describe('ShsButton', () => {
     expect(wrapper.classes()).toContain('is-round')
   })
 
+  it('radius=large 时设置对应设计令牌圆角', () => {
+    const wrapper = mount(ShsButton, { props: { radius: 'large' } })
+    expect(wrapper.attributes('style')).toContain('--shs-button-radius: var(--shs-radius-lg)')
+  })
+
+  it('radius 传数字时按像素设置圆角', () => {
+    const wrapper = mount(ShsButton, { props: { radius: 10 } })
+    expect(wrapper.attributes('style')).toContain('--shs-button-radius: 10px')
+  })
+
   it('点击触发 click 事件', async () => {
     const wrapper = mount(ShsButton, { slots: { default: '点击' } })
     await wrapper.trigger('click')
