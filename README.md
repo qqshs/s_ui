@@ -75,4 +75,5 @@ shs\_ui/
 
 ## 文档
 
-设计文档见 `shs_ui_design.md`（已评审确认，进入 M1 工程搭建阶段）。
+- **设计文档**：[shs_ui_design.md](./shs_ui_design.md)（已评审确认，进入 M1 工程搭建阶段）
+- **文档站**：[docs/](./docs/index.md)（VitePress 组件与使用指南）
